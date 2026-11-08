@@ -6,6 +6,7 @@ import spacy
 from spacy.matcher import PhraseMatcher
 from sentence_transformers import SentenceTransformer
 import re
+from pathlib import Path
 
 # Ensure spacy model is downloaded or handle it gracefully
 try:
@@ -174,3 +175,58 @@ def compute_embeddings(skills: list[str]):
     if not skills:
         return []
     return get_model().encode(skills)
+
+
+# ── Company Name Extraction ─────────────────────────────────────────────
+# Scans JD text to detect which company the job description is for,
+# matching against the ~350+ known companies from the LeetCode dataset.
+
+_COMPANY_NAMES_CACHE: list[str] | None = None
+
+def _load_company_names() -> list[str]:
+    """Load all known company names from the leetcode-company-wise-problems directory."""
+    global _COMPANY_NAMES_CACHE
+    if _COMPANY_NAMES_CACHE is not None:
+        return _COMPANY_NAMES_CACHE
+
+    base_dir = Path(__file__).resolve().parent.parent / "database" / "leetcode-company-wise-problems"
+    if not base_dir.exists():
+        _COMPANY_NAMES_CACHE = []
+        return _COMPANY_NAMES_CACHE
+
+    names = [
+        d.name for d in base_dir.iterdir()
+        if d.is_dir() and not d.name.startswith(".")
+    ]
+    # Sort longest-first so "Goldman Sachs" matches before "Gold" etc.
+    names.sort(key=len, reverse=True)
+    _COMPANY_NAMES_CACHE = names
+    return _COMPANY_NAMES_CACHE
+
+
+def extract_company(text: str) -> str | None:
+    """Extract a company name from JD text by matching against known companies.
+
+    Strategy:
+      1. Try to find company names from the LeetCode dataset in the text.
+      2. Match case-insensitively, preferring longer names first.
+      3. Only match on word boundaries to avoid false positives.
+
+    Returns:
+        The matched company name (canonical casing), or None.
+    """
+    if not text:
+        return None
+
+    text_lower = text.lower()
+    companies = _load_company_names()
+
+    for company in companies:
+        # Skip very short names that cause false positives
+        if len(company) <= 2:
+            continue
+        pattern = r'\b' + re.escape(company.lower()) + r'\b'
+        if re.search(pattern, text_lower):
+            return company
+
+    return None

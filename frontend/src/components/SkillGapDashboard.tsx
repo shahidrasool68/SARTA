@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export interface InferredRoleData {
   role: string;
@@ -19,10 +19,32 @@ export interface GapAnalysis {
 interface SkillGapDashboardProps {
   analysis: GapAnalysis;
   inferredRole?: InferredRoleData | null;
-  onStartTest: () => void;
+  targetCompany?: string | null;
+  onStartTest: (companyOverride?: string) => void;
 }
 
-export default function SkillGapDashboard({ analysis, inferredRole, onStartTest }: SkillGapDashboardProps) {
+export default function SkillGapDashboard({ analysis, inferredRole, targetCompany, onStartTest }: SkillGapDashboardProps) {
+  const [company, setCompany] = useState<string>(targetCompany || '');
+  const [availableCompanies, setAvailableCompanies] = useState<string[]>([]);
+  const [showCompanyDropdown, setShowCompanyDropdown] = useState(false);
+  const [companyFilter, setCompanyFilter] = useState('');
+
+  useEffect(() => {
+    // Load available companies for the dropdown
+    fetch('http://127.0.0.1:8000/api/assessment/available-companies')
+      .then(res => res.json())
+      .then(data => setAvailableCompanies(data.companies || []))
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (targetCompany) setCompany(targetCompany);
+  }, [targetCompany]);
+
+  const filteredCompanies = companyFilter
+    ? availableCompanies.filter(c => c.toLowerCase().includes(companyFilter.toLowerCase())).slice(0, 15)
+    : availableCompanies.slice(0, 15);
+
   // Determine color based on match score
   const scoreColor = 
     analysis.match_score >= 80 ? 'text-emerald-400' :
@@ -78,8 +100,56 @@ export default function SkillGapDashboard({ analysis, inferredRole, onStartTest 
         </div>
       )}
 
-      {/* Grid for Skills */}
-      <div className="grid md:grid-cols-3 gap-6">
+      {/* Target Company Card */}
+      <div className="glass-card rounded-2xl p-6 border-l-4 border-l-cyan-500 bg-cyan-950/20">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div className="flex-1">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-semibold mb-2">
+              🏢 Target Company Detection
+            </div>
+            <p className="text-xs text-slate-400 mt-1">
+              {targetCompany
+                ? `Detected "${targetCompany}" from the job description. The initial MCQ difficulty will be calibrated based on this company's interview tier.`
+                : 'No company detected from the JD. Select one below or proceed with default (Medium) difficulty.'}
+            </p>
+          </div>
+
+          <div className="relative min-w-[220px]">
+            <label className="text-xs text-slate-400 block mb-1">Company:</label>
+            <input
+              type="text"
+              value={company}
+              onChange={(e) => {
+                setCompany(e.target.value);
+                setCompanyFilter(e.target.value);
+                setShowCompanyDropdown(true);
+              }}
+              onFocus={() => setShowCompanyDropdown(true)}
+              placeholder="Type to search..."
+              className="w-full bg-slate-800 text-white text-sm px-3 py-2 rounded-lg border border-white/10 outline-none focus:border-cyan-500/50 transition-colors"
+            />
+            {showCompanyDropdown && filteredCompanies.length > 0 && (
+              <div className="absolute z-50 w-full mt-1 max-h-48 overflow-y-auto rounded-lg bg-slate-800 border border-white/10 shadow-xl">
+                {filteredCompanies.map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => {
+                      setCompany(c);
+                      setCompanyFilter('');
+                      setShowCompanyDropdown(false);
+                    }}
+                    className="w-full text-left px-3 py-2 text-sm text-slate-300 hover:bg-white/10 hover:text-white transition-colors"
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Grid for Skills */}      <div className="grid md:grid-cols-3 gap-6">
         {/* Missing Skills (The Gap) */}
         <div className="glass-card rounded-2xl p-6 border-t-4 border-t-rose-500">
           <div className="flex items-center gap-3 mb-4">
@@ -200,7 +270,7 @@ export default function SkillGapDashboard({ analysis, inferredRole, onStartTest 
       {/* Start Button */}
       <div className="flex justify-center pt-4">
         <button 
-          onClick={onStartTest}
+          onClick={() => onStartTest(company || undefined)}
           className="px-10 py-4 bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-500 hover:to-emerald-500 text-white font-bold rounded-xl shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all hover:scale-105"
         >
           Proceed to Adaptive Assessment

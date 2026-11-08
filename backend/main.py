@@ -3,8 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
 
+import config  # noqa: F401 — loads .env before anything else
+
 from services.parser import extract_text
-from services.nlp_engine import extract_skills, compute_embeddings
+from services.nlp_engine import extract_skills, compute_embeddings, extract_company
 from services.matcher import compute_gap_analysis
 from services.role_mapper import infer_role_from_skills, infer_role_skills
 from services.blueprint_generator import generate_blueprint_from_skills
@@ -64,6 +66,9 @@ async def analyze_gap(resume: UploadFile = File(...), jd: UploadFile = File(...)
         
         # Section 4.3: Role Mapping
         inferred_role_data = infer_role_from_skills(cand_skills)
+
+        # Extract target company from JD text
+        target_company = extract_company(jd_text)
         
         return {
             "status": "success",
@@ -72,7 +77,8 @@ async def analyze_gap(resume: UploadFile = File(...), jd: UploadFile = File(...)
             "job_skills_extracted": len(job_skills),
             "job_skills": job_skills,
             "inferred_role": inferred_role_data,
-            "gap_analysis": gap_analysis
+            "gap_analysis": gap_analysis,
+            "target_company": target_company
         }
     except ValueError as ve:
         raise HTTPException(status_code=400, detail=str(ve))

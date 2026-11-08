@@ -1,20 +1,21 @@
-import uuid
+"""SARTA assessment API: server-authoritative MCQs and Judge0 grading."""
+import os
 import random
+import re
+import uuid
+from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
-from typing import List, Optional, Dict, Any
-from services.judge0_client import evaluate_code
-from database.mongo_skill_tree import get_db
+from pydantic import BaseModel, Field
 from services.adaptive_controller import select_next_question
-from services.blueprint_generator import generate_blueprint_from_skills
 from services.performance_analytics import generate_performance_report
+from services.judge0_client import evaluate_code
+from services.assessment_store import load_session, save_session
+from services.coding_bank import get_public_problem, get_problem, CODING_PROBLEMS
+from services.company_classifier import get_company_assessment_config, classify_company_tier, initial_difficulty_for_tier
+from services.company_problems import load_company_problems, get_top_problems, get_company_problem_stats, get_available_companies
 
 router = APIRouter(prefix="/api/assessment", tags=["Assessment"])
 
-# In-memory session tracking
-_sessions: Dict[str, Dict[str, Any]] = {}
-
-# Curated fallback questions by skill and difficulty to guarantee high reliability
 FALLBACK_QUESTIONS = {
     "Python": {
         "Easy": [
@@ -310,317 +311,271 @@ FALLBACK_QUESTIONS = {
     }
 }
 
-class StartSessionRequest(BaseModel):
-    skills: List[str] = []
-    role: Optional[str] = "Backend Developer"
-    missing_skills: Optional[List[str]] = []
 
-class CodeSubmission(BaseModel):
-    language_id: int
-    source_code: str
-    expected_output: str = ""
-    stdin: str = ""
+# The local verified bank is the source of truth. External scraped questions are not
+# auto-graded unless separately curated, reviewed, and given a stable correct answer.
+DIFFICULTIES = ("Easy", "Medium", "Hard")
+SUPPORTED_SKILLS = tuple(FALLBACK_QUESTIONS)
+ROLE_SKILLS = {
+    "web development": ("JavaScript", "React", "SQL", "OOP"),
+    "frontend developer": ("JavaScript", "React", "OOP", "Data Structures"),
+    "backend developer": ("Python", "SQL", "OOP", "Data Structures"),
+    "data science": ("Python", "Machine Learning", "SQL", "Data Structures"),
+    "data scientist": ("Python", "Machine Learning", "SQL", "Data Structures"),
+    "software engineer": ("Data Structures", "OOP", "Python", "SQL"),
+}
+
+class StartSessionRequest(BaseModel):
+    skills: List[str] = Field(default_factory=list)
+    role: str = "Backend Developer"
+    missing_skills: List[str] = Field(default_factory=list)
+    target_company: Optional[str] = None
 
 class MCQRequest(BaseModel):
-    session_id: Optional[str] = None
+    session_id: str
     skill: str
+    # Legacy fields accepted but ignored; server owns adaptation.
     current_difficulty: str = "Medium"
     is_last_correct: bool = True
     streak: int = 0
 
 class SubmitAnswerRequest(BaseModel):
-    session_id: Optional[str] = None
+    session_id: str
     question_id: str
     selected_answer: str
-    skill: str
-    difficulty: str
-    correct_answer: str
+    # Legacy fields are ignored; never trust browser-sent answer/difficulty.
+    skill: Optional[str] = None
+    difficulty: Optional[str] = None
+    correct_answer: Optional[str] = None
+
+class CodeSubmission(BaseModel):
+    session_id: str
+    problem_id: str
+    language_id: int
+    source_code: str = Field(min_length=1, max_length=100000)
+    mode: str = "submit"  # 'run' checks samples; 'submit' checks all hidden tests
 
 class CompleteAssessmentRequest(BaseModel):
     session_id: str
-    coding_results: List[Dict[str, Any]] = []
+    # Client-provided coding scores are ignored.
+    coding_results: List[Dict[str, Any]] = Field(default_factory=list)
 
-# Global flag to track Mongo connectivity without repeated timeouts
-_mongo_available = True
 
-def get_question_from_bank(skill: str, difficulty: str) -> Dict[str, Any]:
-    """Retrieve question from MongoDB, falling back to curated taxonomy bank."""
-    global _mongo_available
-    if _mongo_available:
-        try:
-            db = get_db()
-            questions_col = db["questions"]
-            
-            pipeline = [
-                {"$match": {"skill": {"$regex": f"^{skill}$", "$options": "i"}, "difficulty": difficulty}},
-                {"$sample": {"size": 1}}
-            ]
-            result = list(questions_col.aggregate(pipeline))
-            if result:
-                q = result[0]
-                q["_id"] = str(q["_id"])
-                return q
-                
-            # Fallback by skill alone
-            pipeline_any = [
-                {"$match": {"skill": {"$regex": f"^{skill}$", "$options": "i"}}},
-                {"$sample": {"size": 1}}
-            ]
-            result_any = list(questions_col.aggregate(pipeline_any))
-            if result_any:
-                q = result_any[0]
-                q["_id"] = str(q["_id"])
-                return q
-        except Exception:
-            _mongo_available = False
+def session_or_404(session_id):
+    session = load_session(session_id)
+    if session is None:
+        raise HTTPException(status_code=404, detail="Unknown assessment session")
+    return session
 
-    # Check in-memory curated bank
-    skill_match = None
-    for k in FALLBACK_QUESTIONS:
-        if k.lower() == skill.lower():
-            skill_match = k
-            break
-    if not skill_match:
-        skill_match = "Python"
 
-    diff_pool = FALLBACK_QUESTIONS.get(skill_match, {}).get(difficulty) or FALLBACK_QUESTIONS.get(skill_match, {}).get("Medium") or FALLBACK_QUESTIONS["Python"]["Medium"]
-    chosen = random.choice(diff_pool)
-    return {
-        "_id": str(uuid.uuid4()),
-        "skill": skill_match,
-        "difficulty": difficulty,
-        "question": chosen["question"],
-        "options": chosen["options"],
-        "correct_answer": chosen["correct_answer"]
-    }
+def canonical_skill(skill):
+    return next((s for s in SUPPORTED_SKILLS if s.casefold() == skill.casefold()), None)
+
+
+def available_levels(skill):
+    return [d for d in DIFFICULTIES if FALLBACK_QUESTIONS[skill].get(d)]
+
+
+def make_question(skill, difficulty, seen):
+    levels = sorted(available_levels(skill), key=lambda level: abs(DIFFICULTIES.index(level) - DIFFICULTIES.index(difficulty)))
+    for level in levels:
+        options = FALLBACK_QUESTIONS[skill][level]
+        choices = [(i,q) for i,q in enumerate(options) if f"{skill}:{level}:{i}" not in seen]
+        if choices:
+            i, q = random.choice(choices)
+            key = f"{skill}:{level}:{i}"
+            # Shuffle options so the correct answer isn't always in the same position.
+            # correct_answer is stored by value, so validation is unaffected.
+            shuffled_options = list(q["options"])
+            random.shuffle(shuffled_options)
+            return key, {"_id": key, "skill": skill, "difficulty": level, "question": q["question"], "options": shuffled_options}, q["correct_answer"]
+    return None
+
+
+@router.get("/catalog")
+def catalog():
+    return {"skills": list(SUPPORTED_SKILLS), "difficulty_levels": list(DIFFICULTIES), "coding_problems": [get_public_problem(k) for k in CODING_PROBLEMS]}
+
 
 @router.post("/start-session")
 def start_assessment_session(req: StartSessionRequest):
-    """
-    Initializes an adaptive assessment session based on candidate skills,
-    role profile, and identified skill gaps.
-    """
-    session_id = str(uuid.uuid4())
-    blueprint = generate_blueprint_from_skills(req.skills, req.role or "Backend Developer", req.missing_skills)
-    
-    # Skills to assess: top 2-3 candidate skills + 1 CS fundamental
-    skills_to_assess = []
-    if req.skills:
-        skills_to_assess.extend(req.skills[:3])
-    if req.missing_skills and len(skills_to_assess) < 4:
-        skills_to_assess.append(req.missing_skills[0])
-    if "OOP" not in skills_to_assess and len(skills_to_assess) < 4:
-        skills_to_assess.append("OOP")
-    if not skills_to_assess:
-        skills_to_assess = ["Python", "Data Structures", "OOP"]
+    skills = []
+    role_key = req.role.strip().lower()
+    role_topics = ROLE_SKILLS.get(role_key, ROLE_SKILLS["software engineer"])
+    # Prioritize skills demonstrated on the resume which overlap the chosen role;
+    # include missing role prerequisites to verify gaps, then general fundamentals.
+    ordered = [s for s in role_topics if s.casefold() in {x.casefold() for x in req.skills}]
+    ordered += [s for s in role_topics if s.casefold() in {x.casefold() for x in req.missing_skills}]
+    ordered += list(role_topics) + req.skills + req.missing_skills + ["OOP", "Python"]
+    for requested in ordered:
+        skill = canonical_skill(requested)
+        if skill and skill not in skills:
+            skills.append(skill)
+        if len(skills) == 4:
+            break
+    if not skills:
+        raise HTTPException(status_code=422, detail="No assessable skills selected")
 
-    _sessions[session_id] = {
-        "session_id": session_id,
-        "role": req.role,
-        "candidate_skills": req.skills,
-        "skills_to_assess": skills_to_assess,
-        "blueprint": blueprint,
-        "responses": [],
-        "coding_results": [],
-        "per_skill_state": {
-            s: {"difficulty": "Medium", "streak": 0, "questions_answered": 0} for s in skills_to_assess
-        },
-        "report": None
+    # ── Company-tier-based initial difficulty ────────────────────────────
+    company_config = get_company_assessment_config(req.target_company or "")
+    initial_diff = company_config["initial_difficulty"]  # Easy / Medium / Hard
+
+    sid = str(uuid.uuid4())
+    session = {
+        "session_id": sid, "role": req.role, "skills_to_assess": skills,
+        "target_company": req.target_company or None,
+        "company_tier": company_config["tier"],
+        "responses": [], "coding_results": [], "pending": None, "seen": [],
+        "per_skill_state": {skill: {"difficulty": initial_diff, "streak": 0, "questions_answered": 0, "correct": 0} for skill in skills},
+        "coding_problem_id": "two_sum", "report": None, "completed": False,
     }
-    
-    return {
-        "session_id": session_id,
-        "role": req.role,
-        "skills_to_assess": skills_to_assess,
-        "questions_per_skill": 2, # 2 questions per skill for responsive adaptive test
-        "total_mcqs": len(skills_to_assess) * 2,
-        "blueprint": blueprint
-    }
+    save_session(session)
+    return {"session_id": sid, "role": req.role, "skills_to_assess": skills,
+            "target_company": req.target_company,
+            "company_tier": company_config["tier"],
+            "questions_per_skill": 3, "total_mcqs": len(skills)*3,
+            "blueprint": {"role": req.role, "skills": skills, "initial_difficulty": initial_diff}}
+
 
 @router.post("/next-mcq")
-def get_next_mcq(req: MCQRequest):
-    """
-    Retrieves the next adaptive MCQ. Adjusts difficulty based on running accuracy.
-    """
-    try:
-        adaptive_state = select_next_question(
-            current_skill=req.skill,
-            current_difficulty=req.current_difficulty,
-            is_last_correct=req.is_last_correct,
-            streak=req.streak
-        )
-        
-        target_diff = adaptive_state["next_difficulty"]
-        question = get_question_from_bank(req.skill, target_diff)
-        
-        return {
-            "adaptive_state": adaptive_state,
-            "question": question
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+def next_mcq(req: MCQRequest):
+    session = session_or_404(req.session_id)
+    if session["completed"]:
+        raise HTTPException(status_code=409, detail="Assessment is already complete")
+    if req.skill not in session["skills_to_assess"]:
+        raise HTTPException(status_code=400, detail="Skill not in assessment")
+    pending = session.get("pending")
+    if pending:
+        if pending["skill"] != req.skill:
+            raise HTTPException(status_code=409, detail="Answer current question before moving on")
+        return {"question": pending["public"], "adaptive_state": {"next_difficulty": pending["difficulty"]}}
+    state = session["per_skill_state"][req.skill]
+    if state["questions_answered"] >= 3:
+        raise HTTPException(status_code=409, detail="Skill question limit reached")
+    selected = make_question(req.skill, state["difficulty"], set(session["seen"]))
+    if not selected:
+        raise HTTPException(status_code=409, detail="Question bank exhausted")
+    key, public, correct = selected
+    session["seen"].append(key)
+    session["pending"] = {"question_id": key, "skill": req.skill, "difficulty": public["difficulty"], "correct": correct, "public": public}
+    save_session(session)
+    return {"question": public, "adaptive_state": {"next_difficulty": public["difficulty"]}}
+
 
 @router.post("/submit-answer")
-def submit_mcq_answer(req: SubmitAnswerRequest):
-    """
-    Submits an MCQ answer, validates correctness, updates adaptive streak,
-    and returns immediate feedback and difficulty adjustment.
-    """
-    is_correct = req.selected_answer.strip().lower() == req.correct_answer.strip().lower()
-    
-    # Update session state if session_id provided
-    streak = 0
-    next_difficulty = req.difficulty
-    
-    if req.session_id and req.session_id in _sessions:
-        session = _sessions[req.session_id]
-        session["responses"].append({
-            "question_id": req.question_id,
-            "skill": req.skill,
-            "difficulty": req.difficulty,
-            "selected_answer": req.selected_answer,
-            "correct_answer": req.correct_answer,
-            "is_correct": is_correct
-        })
-        
-        skill_tracker = session["per_skill_state"].get(req.skill, {"difficulty": req.difficulty, "streak": 0, "questions_answered": 0})
-        skill_tracker["questions_answered"] += 1
-        
-        if is_correct:
-            skill_tracker["streak"] += 1
-        else:
-            skill_tracker["streak"] = 0
-            
-        streak = skill_tracker["streak"]
-        
-        adaptive_res = select_next_question(
-            current_skill=req.skill,
-            current_difficulty=req.difficulty,
-            is_last_correct=is_correct,
-            streak=streak
-        )
-        next_difficulty = adaptive_res["next_difficulty"]
-        skill_tracker["difficulty"] = next_difficulty
-    else:
-        streak = 1 if is_correct else 0
-        adaptive_res = select_next_question(
-            current_skill=req.skill,
-            current_difficulty=req.difficulty,
-            is_last_correct=is_correct,
-            streak=streak
-        )
-        next_difficulty = adaptive_res["next_difficulty"]
+def submit_answer(req: SubmitAnswerRequest):
+    session = session_or_404(req.session_id)
+    pending = session.get("pending")
+    if session["completed"] or not pending or pending["question_id"] != req.question_id:
+        raise HTTPException(status_code=409, detail="Question was not issued or already answered")
+    if req.selected_answer not in pending["public"]["options"]:
+        raise HTTPException(status_code=422, detail="Answer must match a supplied option")
+    correct = req.selected_answer == pending["correct"]
+    skill = pending["skill"]
+    state = session["per_skill_state"][skill]
+    state["questions_answered"] += 1
+    state["correct"] += int(correct)
+    state["streak"] = state["streak"] + 1 if correct else 0
+    # Consistent CAT-inspired calibration: streak plus per-skill running accuracy.
+    result = select_next_question(skill, pending["difficulty"], correct, state["streak"],
+                                  accuracy=state["correct"]/state["questions_answered"])
+    state["difficulty"] = result["next_difficulty"]
+    session["responses"].append({"question_id": pending["question_id"], "skill": skill,
+                                 "difficulty": pending["difficulty"], "selected_answer": req.selected_answer,
+                                 "is_correct": correct})
+    session["pending"] = None
+    save_session(session)
+    return {"is_correct": correct, "correct_answer": pending["correct"],
+            "streak": state["streak"], "next_difficulty": state["difficulty"],
+            "running_accuracy": round(100*state["correct"]/state["questions_answered"],1)}
 
-    return {
-        "is_correct": is_correct,
-        "correct_answer": req.correct_answer,
-        "streak": streak,
-        "next_difficulty": next_difficulty
-    }
 
 @router.get("/coding-question/{company}")
-def get_coding_question(company: str):
-    """
-    Fetches a coding question from the ingested repository by company or fallback.
-    """
-    try:
-        db = get_db()
-        coding_col = db["coding_questions"]
-        
-        pipeline = [
-            {"$match": {"companies": {"$regex": f"^{company}$", "$options": "i"}}},
-            {"$sample": {"size": 1}}
-        ]
-        result = list(coding_col.aggregate(pipeline))
-        if result:
-            q = result[0]
-            q["_id"] = str(q["_id"])
-            return q
-            
-        # Fallback to any coding question in DB
-        result_any = list(coding_col.aggregate([{"$sample": {"size": 1}}]))
-        if result_any:
-            q = result_any[0]
-            q["_id"] = str(q["_id"])
-            return q
-    except Exception:
-        pass
-
-    # Reliable fallback coding question
+def coding_question(company: str):
+    # Public statement and SAMPLE tests only; private hidden inputs never leave backend.
+    problem = get_public_problem("two_sum")
+    # Attach company-specific LeetCode problem stats if available
+    company_stats = get_company_problem_stats(company) if company and company != "General" else None
+    company_problems_list = get_top_problems(company, n=5) if company and company != "General" else []
     return {
-        "_id": "mock_coding_1",
-        "title": "Two Sum Problem",
-        "difficulty": "Easy",
-        "company": company or "Google",
-        "description": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\n\nExample:\nInput: nums = [2,7,11,15], target = 9\nOutput: [0, 1]",
-        "starter_code": "def two_sum(nums, target):\n    # Write your solution here\n    seen = {}\n    for i, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], i]\n        seen[num] = i\n    return []\n\nprint(two_sum([2, 7, 11, 15], 9))\n",
-        "test_cases": [
-            {"id": 1, "label": "Test Case 1 (Sample)", "input": "nums = [2,7,11,15], target = 9", "expected": "[0, 1]", "hidden": False},
-            {"id": 2, "label": "Test Case 2 (Hidden)", "input": "nums = [3,2,4], target = 6", "expected": "[1, 2]", "hidden": True},
-            {"id": 3, "label": "Test Case 3 (Hidden)", "input": "nums = [3,3], target = 6", "expected": "[0, 1]", "hidden": True}
-        ]
+        **problem,
+        "company": company if company and company != "General" else "General",
+        "company_stats": company_stats,
+        "company_problems": company_problems_list,
     }
+
+
+@router.get("/company-problems/{company}")
+def company_problems_endpoint(company: str, difficulty: Optional[str] = None, limit: int = 20):
+    """Get LeetCode problems frequently asked by a specific company."""
+    problems = get_top_problems(company, n=limit, difficulty=difficulty)
+    stats = get_company_problem_stats(company)
+    return {
+        "company": company,
+        "stats": stats,
+        "problems": problems,
+    }
+
+
+@router.get("/available-companies")
+def available_companies():
+    """List all companies with LeetCode problem data."""
+    return {"companies": get_available_companies()}
+
 
 @router.post("/evaluate-code")
 async def evaluate_candidate_code(submission: CodeSubmission):
-    """
-    Submits code to Judge0 CE execution sandbox. 
-    Gracefully handles environment when Judge0 is offline.
-    """
-    try:
-        result = await evaluate_code(
-            language_id=submission.language_id,
-            source_code=submission.source_code,
-            expected_output=submission.expected_output,
-            stdin=submission.stdin
-        )
-        result["test_cases_passed"] = 3 if result.get("success") else 0
-        result["test_cases_total"] = 3
-        return result
-    except Exception as e:
-        # Fallback simulation if local Judge0 daemon is not currently active
-        return {
-            "success": True,
-            "status": "Accepted (Sandbox Simulation)",
-            "stdout": "[Execution Sandbox: Verified against hidden test cases]\n✓ Test Case 1 (Sample): Passed\n✓ Test Case 2 (Hidden): Passed\n✓ Test Case 3 (Hidden): Passed\nAll 3/3 test cases passed successfully.",
-            "stderr": "",
-            "time": "0.042s",
-            "memory": "8420 KB",
-            "test_cases_passed": 3,
-            "test_cases_total": 3
-        }
+    session = session_or_404(submission.session_id)
+    if session["completed"]:
+        raise HTTPException(status_code=409, detail="Assessment is already complete")
+    if submission.problem_id != session["coding_problem_id"]:
+        raise HTTPException(status_code=400, detail="Problem not assigned to session")
+    if submission.mode not in ("run", "submit"):
+        raise HTTPException(status_code=422, detail="mode must be run or submit")
+    if submission.language_id not in (71, 63, 62, 54):
+        raise HTTPException(status_code=422, detail="Unsupported Judge0 language")
+    problem = get_problem(submission.problem_id)
+    tests = problem["test_cases"] if submission.mode == "submit" else [t for t in problem["test_cases"] if not t["hidden"]]
+    results = []
+    for test in tests:
+        result = await evaluate_code(submission.language_id, submission.source_code, test["expected"], test["stdin"])
+        results.append({"passed": result["success"], "status": result["status"], "time": result.get("time"),
+                        "label": "Hidden test" if test["hidden"] else test["label"]})
+        if result.get("status") == "Sandbox unavailable":
+            raise HTTPException(status_code=503, detail="Judge0 is unavailable. No coding score has been awarded.")
+    passed = sum(bool(r["passed"]) for r in results)
+    response = {"success": passed == len(tests), "status": "Accepted" if passed == len(tests) else "Test cases failed",
+                "test_cases_passed": passed, "test_cases_total": len(tests), "tests": results,
+                "stdout": f"{passed}/{len(tests)} tests passed", "time": results[-1].get("time") if results else None}
+    if submission.mode == "submit":
+        record = {"title": problem["title"], "difficulty": problem["difficulty"], "language": submission.language_id,
+                  "passed": response["success"], "test_cases_passed": passed, "test_cases_total": len(tests),
+                  "time": response["time"]}
+        session["coding_results"] = [record]
+        save_session(session)
+    return response
+
 
 @router.post("/complete")
-def complete_assessment(req: CompleteAssessmentRequest):
-    """
-    Finalizes the assessment session, compiles candidate responses and coding results,
-    and returns the explainable skill-wise evaluation report.
-    """
-    session = _sessions.get(req.session_id, {
-        "responses": [],
-        "coding_results": [],
-        "role": "Software Engineer"
-    })
-    
-    session["coding_results"] = req.coding_results
-    
-    report = generate_performance_report(
-        assessment_responses=session.get("responses", []),
-        coding_results=req.coding_results
-    )
-    report["role"] = session.get("role", "Software Engineer")
+def complete(req: CompleteAssessmentRequest):
+    session = session_or_404(req.session_id)
+    if session["pending"]:
+        raise HTTPException(status_code=409, detail="Please answer the current question first")
+    if session["report"]:
+        return {"status": "success", "session_id": req.session_id, "report": session["report"]}
+    # Never trust coding_results supplied by the browser.
+    report = generate_performance_report(session["responses"], session["coding_results"])
+    report["role"] = session["role"]
+    report["coding_status"] = "graded" if session["coding_results"] else "not_submitted"
     session["report"] = report
-    
-    return {
-        "status": "success",
-        "session_id": req.session_id,
-        "report": report
-    }
+    session["completed"] = True
+    save_session(session)
+    return {"status": "success", "session_id": req.session_id, "report": report}
+
 
 @router.get("/report/{session_id}")
-def get_assessment_report(session_id: str):
-    """Retrieves an existing performance report."""
-    session = _sessions.get(session_id)
-    if not session or not session.get("report"):
-        raise HTTPException(status_code=404, detail="Assessment report not found for this session")
+def report(session_id: str):
+    session = session_or_404(session_id)
+    if not session.get("report"):
+        raise HTTPException(status_code=404, detail="Report not ready")
     return session["report"]

@@ -9,6 +9,7 @@ interface AssessmentSessionProps {
   candidateSkills?: string[];
   missingSkills?: string[];
   role?: string;
+  targetCompany?: string | null;
   onFinish: (report: any) => void;
   onCancel?: () => void;
 }
@@ -40,15 +41,17 @@ export default function AssessmentSession({
   candidateSkills = ['Python', 'SQL', 'OOP'],
   missingSkills = [],
   role = 'Backend Developer',
+  targetCompany = null,
   onFinish,
   onCancel
 }: AssessmentSessionProps) {
   // Session State
   const [sessionId, setSessionId] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const [skillsToAssess, setSkillsToAssess] = useState<string[]>([]);
   const [currentSkillIdx, setCurrentSkillIdx] = useState<number>(0);
   const [currentQuestionInSkill, setCurrentQuestionInSkill] = useState<number>(1);
-  const questionsPerSkill = 2; // 2 adaptive questions per skill
+  const questionsPerSkill = 3; // three questions per skill allow difficulty progression
 
   const [currentType, setCurrentType] = useState<QuestionType>('MCQ');
   const [currentDifficulty, setCurrentDifficulty] = useState<string>('Medium');
@@ -63,11 +66,12 @@ export default function AssessmentSession({
 
   // Coding State
   const [codingData, setCodingData] = useState<any>(null);
+  const [companyProblems, setCompanyProblems] = useState<any[]>([]);
+  const [companyStats, setCompanyStats] = useState<any>(null);
   const [selectedLanguage, setSelectedLanguage] = useState<string>('Python');
   const [code, setCode] = useState<string>(LANGUAGE_MAP['Python'].starter);
   const [isExecutingCode, setIsExecutingCode] = useState<boolean>(false);
   const [executionResult, setExecutionResult] = useState<any>(null);
-  const [codingSubmissions, setCodingSubmissions] = useState<any[]>([]);
 
   // Timer State (45:00 countdown)
   const [secondsLeft, setSecondsLeft] = useState<number>(45 * 60);
@@ -87,7 +91,8 @@ export default function AssessmentSession({
           body: JSON.stringify({
             skills: candidateSkills,
             role: role,
-            missing_skills: missingSkills
+            missing_skills: missingSkills,
+            target_company: targetCompany
           })
         });
 
@@ -98,20 +103,18 @@ export default function AssessmentSession({
             ? data.skills_to_assess
             : ['Python', 'Data Structures', 'OOP'];
           setSkillsToAssess(assessList);
-          loadNextMCQ(assessList[0], 'Medium', 0, true, data.session_id);
+          // Use the company-tier-based initial difficulty from the server
+          const initialDiff = data.blueprint?.initial_difficulty || 'Medium';
+          setCurrentDifficulty(initialDiff);
+          loadNextMCQ(assessList[0], initialDiff, 0, true, data.session_id);
         } else {
-          // Fallback if backend start session fails
-          const fallbackSkills = candidateSkills.length > 0 ? candidateSkills.slice(0, 3) : ['Python', 'OOP'];
-          setSkillsToAssess(fallbackSkills);
-          loadNextMCQ(fallbackSkills[0], 'Medium', 0, true, '');
+          throw new Error('Unable to start assessment session');
         }
       } catch (e) {
-        const fallbackSkills = candidateSkills.length > 0 ? candidateSkills.slice(0, 3) : ['Python', 'OOP'];
-        setSkillsToAssess(fallbackSkills);
-        loadNextMCQ(fallbackSkills[0], 'Medium', 0, true, '');
+        setError(e instanceof Error ? e.message : 'Backend unavailable');
+        setLoadingQuestion(false);
       }
 
-      // Pre-fetch coding question
       fetchCodingQuestion();
     };
 
@@ -159,19 +162,8 @@ export default function AssessmentSession({
         throw new Error('Fallback needed');
       }
     } catch {
-      setMcqData({
-        _id: 'fallback_q',
-        skill: skillName,
-        difficulty: difficulty,
-        question: `[Adaptive Check] In ${skillName}, which core concept enables modular software architecture?`,
-        options: [
-          'Encapsulation & Abstraction',
-          'Static global pointers',
-          'Linear memory traversal',
-          'Hardware interrupts'
-        ],
-        correct_answer: 'Encapsulation & Abstraction'
-      });
+      setError('Could not retrieve an assessment question. Check the backend server.');
+      setMcqData(null);
     } finally {
       setLoadingQuestion(false);
     }
@@ -180,21 +172,20 @@ export default function AssessmentSession({
   // Fetch Coding Question
   const fetchCodingQuestion = async () => {
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/assessment/coding-question/Google');
+      const companyParam = encodeURIComponent(targetCompany || 'General');
+      const res = await fetch(`http://127.0.0.1:8000/api/assessment/coding-question/${companyParam}`);
       if (res.ok) {
         const data = await res.json();
+        if (!res.ok) throw new Error('Coding question unavailable');
         setCodingData(data);
-        if (data.starter_code) {
+        if (data.company_problems) setCompanyProblems(data.company_problems);
+        if (data.company_stats) setCompanyStats(data.company_stats);
+        if (data.starter_code && selectedLanguage === 'Python') {
           setCode(data.starter_code);
         }
       }
     } catch {
-      setCodingData({
-        title: 'Two Sum Problem',
-        difficulty: 'Easy',
-        company: 'Google',
-        description: 'Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\n\nExample:\nInput: nums = [2, 7, 11, 15], target = 9\nOutput: [0, 1]'
-      });
+      setError('Could not load coding problem.');
     }
   };
 
@@ -203,6 +194,7 @@ export default function AssessmentSession({
     if (isAnswerSubmitted || !mcqData) return;
     setSelectedOption(option);
     setIsAnswerSubmitted(true);
+    setError('');
 
     try {
       const res = await fetch('http://127.0.0.1:8000/api/assessment/submit-answer', {
@@ -214,7 +206,6 @@ export default function AssessmentSession({
           selected_answer: option,
           skill: mcqData.skill,
           difficulty: mcqData.difficulty,
-          correct_answer: mcqData.correct_answer
         })
       });
 
@@ -227,18 +218,12 @@ export default function AssessmentSession({
         setStreak(data.streak);
         setCurrentDifficulty(data.next_difficulty);
       } else {
-        const isCorr = option.trim().toLowerCase() === mcqData.correct_answer?.trim().toLowerCase();
-        setAnswerFeedback({
-          is_correct: isCorr,
-          correct_answer: mcqData.correct_answer || option
-        });
+        setError('Answer submission failed; please retry from a new session.');
+        setIsAnswerSubmitted(false);
       }
     } catch {
-      const isCorr = option.trim().toLowerCase() === mcqData.correct_answer?.trim().toLowerCase();
-      setAnswerFeedback({
-        is_correct: isCorr,
-        correct_answer: mcqData.correct_answer || option
-      });
+      setError('Network error while submitting answer.');
+      setIsAnswerSubmitted(false);
     }
   };
 
@@ -257,7 +242,8 @@ export default function AssessmentSession({
         setCurrentSkillIdx(nextSkillIdx);
         setCurrentQuestionInSkill(1);
         const nextSkill = skillsToAssess[nextSkillIdx];
-        loadNextMCQ(nextSkill, 'Medium', 0, true, sessionId);
+        // Keep using the current adaptive difficulty (server-authoritative)
+        loadNextMCQ(nextSkill, currentDifficulty, 0, true, sessionId);
       } else {
         // All MCQs complete -> transition to Coding phase
         setCurrentType('CODING');
@@ -265,98 +251,58 @@ export default function AssessmentSession({
     }
   };
 
-  // Run Code via Judge0
-  const handleRunCode = async () => {
+  // Run sample cases or submit all cases using the server-held coding problem.
+  const handleRunCode = async (mode: 'run' | 'submit' = 'run') => {
+    if (!sessionId || !codingData?._id) {
+      setError('Assessment session or coding problem not initialized.');
+      return;
+    }
     setIsExecutingCode(true);
     setExecutionResult(null);
-
+    setError('');
     const langConfig = LANGUAGE_MAP[selectedLanguage] || LANGUAGE_MAP['Python'];
-
     try {
       const res = await fetch('http://127.0.0.1:8000/api/assessment/evaluate-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          session_id: sessionId,
+          problem_id: codingData._id,
+          mode,
           language_id: langConfig.id,
-          source_code: code,
-          expected_output: '',
-          stdin: ''
+          source_code: code
         })
       });
-
       const data = await res.json();
-      setExecutionResult(data);
-    } catch {
-      setExecutionResult({
-        success: true,
-        status: 'Accepted (Sandbox Evaluation)',
-        stdout: '[Judge0 CE Sandbox]\nExecution completed with exit code 0.\nOutputs verified against test cases.',
-        time: '0.042s'
-      });
+      if (!res.ok) throw new Error(data.detail || 'Judge0 grading failed');
+      setExecutionResult({ ...data, mode });
+      return data;
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Coding sandbox unavailable');
+      return null;
     } finally {
       setIsExecutingCode(false);
     }
   };
 
-  // Submit Coding & Complete Assessment
   const handleFinalSubmit = async (skipped = false) => {
-    const codingRecord = {
-      title: codingData?.title || 'Algorithm Challenge',
-      difficulty: codingData?.difficulty || 'Medium',
-      passed: skipped ? false : (executionResult?.success ?? true),
-      time: executionResult?.time || '0.05s',
-      language: selectedLanguage
-    };
-
-    const finalCodingList = [...codingSubmissions, codingRecord];
-
+    setError('');
+    if (!skipped) {
+      const result = await handleRunCode('submit');
+      if (!result) return; // do not synthesize successful evaluations
+    }
     try {
       const res = await fetch('http://127.0.0.1:8000/api/assessment/complete', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          session_id: sessionId,
-          coding_results: finalCodingList
-        })
+        body: JSON.stringify({ session_id: sessionId })
       });
-
-      if (res.ok) {
-        const data = await res.json();
-        onFinish(data.report);
-        return;
-      }
-    } catch {
-      // Fallback local report generation
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || 'Could not complete the assessment');
+      onFinish(data.report);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Unable to retrieve verified report');
     }
-
-    // Default synthesized report if network fails
-    onFinish({
-      overall_percentage: 82.5,
-      mcq_score: 85.0,
-      coding_score: skipped ? 0.0 : 80.0,
-      total_mcqs: skillsToAssess.length * questionsPerSkill,
-      total_mcqs_correct: Math.floor(skillsToAssess.length * questionsPerSkill * 0.8),
-      role: role,
-      final_recommendation: 'Suitable',
-      recommendation_text: 'Demonstrates robust problem-solving ability across technical competencies.',
-      skill_breakdown: skillsToAssess.reduce((acc, s) => {
-        acc[s] = {
-          total: questionsPerSkill,
-          correct: questionsPerSkill,
-          highest_difficulty_passed: 'Hard',
-          accuracy: 100.0
-        };
-        return acc;
-      }, {} as any),
-      strengths: skillsToAssess.slice(0, 2),
-      weaknesses: [],
-      needs_practice: skillsToAssess.slice(2),
-      coding_summary: {
-        total: 1,
-        passed: skipped ? 0 : 1,
-        score: skipped ? 0 : 100
-      }
-    });
   };
 
   const currentSkill = skillsToAssess[currentSkillIdx] || 'Python';
@@ -365,6 +311,7 @@ export default function AssessmentSession({
 
   return (
     <div className="w-full max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500 pb-16">
+      {error && <div role="alert" className="rounded-xl border border-rose-500/40 bg-rose-950/30 p-4 text-sm text-rose-200">{error}</div>}
       {/* Assessment Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-4 border-b border-white/10">
         <div>
@@ -571,6 +518,45 @@ export default function AssessmentSession({
               </div>
             )}
 
+            {/* Company-Specific LeetCode Problems */}
+            {companyProblems.length > 0 && (
+              <div className="my-4 space-y-2 border-t border-white/10 pt-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider">
+                    🏢 {targetCompany || codingData?.company} — Top LeetCode Problems
+                  </span>
+                  {companyStats && (
+                    <span className="text-[11px] text-slate-400">
+                      {companyStats.total} total ({companyStats.easy}E / {companyStats.medium}M / {companyStats.hard}H)
+                    </span>
+                  )}
+                </div>
+                <div className="grid grid-cols-1 gap-1.5">
+                  {companyProblems.map((p: any, idx: number) => (
+                    <a
+                      key={idx}
+                      href={p.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-lg bg-slate-900/60 border border-white/5 flex items-center justify-between text-xs hover:bg-white/5 transition-colors"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
+                          p.difficulty === 'EASY' ? 'bg-emerald-500/20 text-emerald-400' :
+                          p.difficulty === 'HARD' ? 'bg-rose-500/20 text-rose-400' :
+                          'bg-amber-500/20 text-amber-400'
+                        }`}>
+                          {p.difficulty}
+                        </span>
+                        <span className="text-slate-300">{p.title}</span>
+                      </div>
+                      <span className="text-slate-500 text-[10px]">{p.topics?.slice(0, 3).join(', ')}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Execution Result Box */}
             {executionResult && (
               <div
@@ -651,7 +637,7 @@ export default function AssessmentSession({
 
               <div className="flex gap-2">
                 <button
-                  onClick={handleRunCode}
+                  onClick={() => handleRunCode('run')}
                   disabled={isExecutingCode}
                   className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-semibold border border-white/10 transition-all"
                 >
@@ -660,6 +646,7 @@ export default function AssessmentSession({
 
                 <button
                   onClick={() => handleFinalSubmit(false)}
+                  disabled={isExecutingCode || !sessionId}
                   className="px-5 py-2 rounded-lg bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-white text-xs font-bold transition-all shadow-lg shadow-emerald-500/20"
                 >
                   Submit & Finish Assessment

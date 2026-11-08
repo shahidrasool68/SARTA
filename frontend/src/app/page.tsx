@@ -18,6 +18,7 @@ export default function Home() {
   const [inferredRole, setInferredRole] = useState<InferredRoleData | null>(null);
   const [candidateSkills, setCandidateSkills] = useState<string[]>([]);
   const [missingSkills, setMissingSkills] = useState<string[]>([]);
+  const [targetCompany, setTargetCompany] = useState<string | null>(null);
 
   // Assessment & Report state
   const [performanceReport, setPerformanceReport] = useState<PerformanceReport | null>(null);
@@ -43,6 +44,7 @@ export default function Home() {
       const data = await response.json();
       setAnalysisResult(data.gap_analysis);
       setInferredRole(data.inferred_role || null);
+      setTargetCompany(data.target_company || null);
       
       const cSkills = data.candidate_skills || 
         [...data.gap_analysis.common.map((c: any) => c.candidate_has), ...data.gap_analysis.additional];
@@ -58,7 +60,10 @@ export default function Home() {
     }
   };
 
-  const handleStartAssessment = () => {
+  const handleStartAssessment = (companyOverride?: string) => {
+    if (companyOverride !== undefined) {
+      setTargetCompany(companyOverride);
+    }
     setCurrentStep('assessment');
   };
 
@@ -72,6 +77,7 @@ export default function Home() {
     setJd(null);
     setAnalysisResult(null);
     setInferredRole(null);
+    setTargetCompany(null);
     setPerformanceReport(null);
     setCurrentStep('upload');
   };
@@ -178,6 +184,7 @@ export default function Home() {
           <SkillGapDashboard 
             analysis={analysisResult} 
             inferredRole={inferredRole}
+            targetCompany={targetCompany}
             onStartTest={handleStartAssessment} 
           />
         )}
@@ -188,6 +195,7 @@ export default function Home() {
             candidateSkills={candidateSkills}
             missingSkills={missingSkills}
             role={inferredRole?.role || 'Backend Developer'}
+            targetCompany={targetCompany}
             onFinish={handleAssessmentFinish}
             onCancel={handleRestart}
           />

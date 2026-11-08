@@ -1,42 +1,41 @@
-import httpx
+"""Judge0 CE client. Fail closed when sandbox is unreachable."""
 import base64
+import os
+import httpx
+from config import JUDGE0_URL, JUDGE0_API_KEY, JUDGE0_API_HOST
 
-JUDGE0_URL = "http://localhost:2358"
+def _decode(value):
+    if not value: return ""
+    try: return base64.b64decode(value).decode("utf-8", errors="replace")
+    except (ValueError, TypeError): return str(value)
 
 async def evaluate_code(language_id: int, source_code: str, expected_output: str, stdin: str = ""):
-    """
-    Submit code to the self-hosted Judge0 CE instance and wait for evaluation.
-    """
-    encoded_source = base64.b64encode(source_code.encode()).decode()
-    encoded_expected = base64.b64encode(expected_output.encode()).decode() if expected_output else ""
-    encoded_stdin = base64.b64encode(stdin.encode()).decode() if stdin else ""
-    
     payload = {
         "language_id": language_id,
-        "source_code": encoded_source,
-        "expected_output": encoded_expected,
-        "stdin": encoded_stdin,
-        "base64_encoded": True
+        "source_code": base64.b64encode(source_code.encode()).decode(),
+        "stdin": base64.b64encode(stdin.encode()).decode(),
+        "expected_output": base64.b64encode(expected_output.encode()).decode(),
+        "cpu_time_limit": 2, "wall_time_limit": 5, "memory_limit": 128000
     }
-    
-    async with httpx.AsyncClient() as client:
-        # Submit submission
-        response = await client.post(f"{JUDGE0_URL}/submissions?base64_encoded=true&wait=true", json=payload)
-        
-        if response.status_code == 201 or response.status_code == 200:
-            result = response.json()
-            status = result.get("status", {}).get("description")
-            # Decode output if present
-            stdout = base64.b64decode(result.get("stdout", "") or "").decode()
-            stderr = base64.b64decode(result.get("stderr", "") or "").decode()
-            
-            return {
-                "success": status == "Accepted",
-                "status": status,
-                "stdout": stdout,
-                "stderr": stderr,
-                "time": result.get("time"),
-                "memory": result.get("memory")
-            }
-        else:
-            return {"success": False, "status": "Error", "message": response.text}
+    headers = {
+        "Content-Type": "application/json",
+    }
+    if JUDGE0_API_KEY:
+        headers["X-RapidAPI-Key"] = JUDGE0_API_KEY
+        headers["X-RapidAPI-Host"] = JUDGE0_API_HOST
+
+    try:
+        async with httpx.AsyncClient(timeout=15) as client:
+            response = await client.post(
+                f"{JUDGE0_URL}/submissions",
+                params={"base64_encoded": "true", "wait": "true"},
+                json=payload,
+                headers=headers
+            )
+            response.raise_for_status()
+            data = response.json()
+        status = data.get("status", {}).get("description", "Unknown")
+        return {"success": status == "Accepted", "status": status, "stdout": _decode(data.get("stdout")),
+                "stderr": _decode(data.get("stderr")), "time": data.get("time"), "memory": data.get("memory")}
+    except (httpx.HTTPError, ValueError, KeyError) as exc:
+        return {"success": False, "status": "Sandbox unavailable", "message": str(exc)}

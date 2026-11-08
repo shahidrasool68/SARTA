@@ -1,6 +1,10 @@
 import os
+import sys
 import csv
-from mongo_skill_tree import get_db
+
+# Allow running this file directly (python database/github_ingester.py)
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from database.mongo_skill_tree import get_db
 
 REPO_DIR = "database/leetcode-company-wise-problems"
 

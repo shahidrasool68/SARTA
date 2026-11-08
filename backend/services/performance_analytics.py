@@ -67,7 +67,9 @@ def generate_performance_report(assessment_responses: list[dict], coding_results
     coding_results = coding_results or []
     coding_total = len(coding_results)
     coding_passed = sum(1 for c in coding_results if c.get('passed', False))
-    coding_score = round((coding_passed / coding_total * 100), 1) if coding_total > 0 else 0.0
+    tested_cases = sum(int(c.get("test_cases_total", 0)) for c in coding_results)
+    passed_cases = sum(int(c.get("test_cases_passed", 0)) for c in coding_results)
+    coding_score = round(100 * passed_cases / tested_cases, 1) if tested_cases else (round(100 * coding_passed / coding_total, 1) if coding_total else 0.0)
 
     # MCQ overall score
     total_mcq_correct = sum(s["correct"] for s in skill_stats.values())
@@ -105,6 +107,8 @@ def generate_performance_report(assessment_responses: list[dict], coding_results
             "total": coding_total,
             "passed": coding_passed,
             "score": coding_score,
+            "test_cases_passed": passed_cases,
+            "test_cases_total": tested_cases,
             "submissions": coding_results
         },
         "skill_breakdown": skill_stats,
