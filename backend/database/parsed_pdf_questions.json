@@ -1,0 +1,4242 @@
+{
+  "OS": {
+    "Easy": [
+      {
+        "question_num": 1,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "Which of the following is an example of an operating system?",
+        "options": [
+          "Linux",
+          "Photoshop",
+          "MySQL",
+          "Python"
+        ],
+        "correct_answer": "Linux",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 2,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "What does RAM stand for?",
+        "options": [
+          "Read Always Memory",
+          "Random Access Memory",
+          "Random Active Memory",
+          "Rapid Access Module"
+        ],
+        "correct_answer": "Random Access Memory",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 3,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "Which part of the operating system interacts directly with the hardware?",
+        "options": [
+          "Compiler",
+          "Text editor",
+          "Kernel",
+          "Shell"
+        ],
+        "correct_answer": "Kernel",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 4,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "Which of the following is a CPU scheduling algorithm?",
+        "options": [
+          "Round Robin",
+          "Binary Search",
+          "Bubble Sort",
+          "Merge Sort"
+        ],
+        "correct_answer": "Round Robin",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 5,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "What is a process?",
+        "options": [
+          "A hardware device",
+          "A compiled binary file",
+          "A program in execution",
+          "A file stored on disk"
+        ],
+        "correct_answer": "A program in execution",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 6,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "Which of the following is non-volatile memory?",
+        "options": [
+          "RAM",
+          "Hard disk",
+          "Cache",
+          "CPU registers"
+        ],
+        "correct_answer": "Hard disk",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 7,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "What is the main function of a shell?",
+        "options": [
+          "Allocates physical memory to processes",
+          "Manages the CPU cache",
+          "Provides an interface between the user and the kernel",
+          "Compiles source code into machine code"
+        ],
+        "correct_answer": "Provides an interface between the user and the kernel",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 8,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "Which of the following is NOT a standard process state?",
+        "options": [
+          "Compiling",
+          "Waiting",
+          "Ready",
+          "Running"
+        ],
+        "correct_answer": "Compiling",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 9,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "Which of the following is the fastest memory?",
+        "options": [
+          "CPU registers",
+          "SSD",
+          "RAM",
+          "L2 cache"
+        ],
+        "correct_answer": "CPU registers",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 10,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "What is multiprogramming?",
+        "options": [
+          "Running a program only after the previous one finishes",
+          "Compiling several programs together",
+          "Running a single program on several CPUs",
+          "Keeping several programs in memory at once to maximize CPU utilization"
+        ],
+        "correct_answer": "Keeping several programs in memory at once to maximize CPU utilization",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 11,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "What is a deadlock?",
+        "options": [
+          "Processes waiting indefinitely for resources held by one another",
+          "Main memory running out of space",
+          "The CPU being idle while waiting for I/O",
+          "A process terminating abnormally"
+        ],
+        "correct_answer": "Processes waiting indefinitely for resources held by one another",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 12,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "Which scheduling algorithm is non-preemptive by nature?",
+        "options": [
+          "Preemptive Priority",
+          "Round Robin",
+          "Shortest Remaining Time First",
+          "First Come First Served (FCFS)"
+        ],
+        "correct_answer": "First Come First Served (FCFS)",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 13,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "What is the purpose of a system call?",
+        "options": [
+          "To let user programs request services from the kernel",
+          "To compile a program",
+          "To speed up the CPU clock",
+          "To format a disk partition"
+        ],
+        "correct_answer": "To let user programs request services from the kernel",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 14,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "Which statement about threads of the same process is correct?",
+        "options": [
+          "Each thread has its own separate address space",
+          "They share the same address space and open files",
+          "Threads cannot share data with each other",
+          "Each thread has its own separate code section and heap"
+        ],
+        "correct_answer": "They share the same address space and open files",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 15,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "Which information is stored in a Process Control Block (PCB)?",
+        "options": [
+          "The full source code of the program",
+          "The disk partition layout",
+          "The user's login password",
+          "Process state and program counter"
+        ],
+        "correct_answer": "Process state and program counter",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 16,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "Which scheduling algorithm can cause starvation of long processes?",
+        "options": [
+          "Round Robin",
+          "First Come First Served",
+          "Lottery scheduling",
+          "Shortest Job First (SJF)"
+        ],
+        "correct_answer": "Shortest Job First (SJF)",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 17,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "Paging eliminates which type of fragmentation?",
+        "options": [
+          "Internal fragmentation",
+          "External fragmentation",
+          "Both internal and external fragmentation",
+          "Neither internal nor external fragmentation"
+        ],
+        "correct_answer": "External fragmentation",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 18,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "What is the purpose of a mutex?",
+        "options": [
+          "To allocate memory to a process",
+          "To schedule processes by priority",
+          "To increase the page size",
+          "To ensure only one thread is in a critical section at a time"
+        ],
+        "correct_answer": "To ensure only one thread is in a critical section at a time",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 19,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "In Round Robin scheduling, if the time quantum is extremely large, the\nalgorithm behaves like:",
+        "options": [
+          "SJF",
+          "LIFO",
+          "FCFS",
+          "Priority scheduling"
+        ],
+        "correct_answer": "FCFS",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 20,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "What is a context switch?",
+        "options": [
+          "Copying a file from one disk to another",
+          "Switching the CPU to a higher clock speed",
+          "Swapping the RAM modules",
+          "Saving the state of the running process and loading the state of another"
+        ],
+        "correct_answer": "Saving the state of the running process and loading the state of another",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 21,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "Which of the following is a necessary condition for deadlock?",
+        "options": [
+          "Spooling",
+          "Time slicing",
+          "Hold and wait",
+          "Preemption"
+        ],
+        "correct_answer": "Hold and wait",
+        "answer_letter": "C"
+      }
+    ],
+    "Medium": [
+      {
+        "question_num": 22,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "What value does fork() return in the child process?",
+        "options": [
+          "The child's PID",
+          "The parent's PID",
+          "-1",
+          "0"
+        ],
+        "correct_answer": "0",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 23,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "Which context switch is generally faster?",
+        "options": [
+          "Between threads of the same process",
+          "Between two different processes",
+          "Between two processes running on different CPUs",
+          "Both take exactly the same time"
+        ],
+        "correct_answer": "Between threads of the same process",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 24,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "What is virtual memory?",
+        "options": [
+          "Memory physically located on the CPU",
+          "A copy of RAM stored in the cache",
+          "A technique that lets a process run even if it is not entirely in physical memory",
+          "Extra RAM added through a USB device"
+        ],
+        "correct_answer": "A technique that lets a process run even if it is not entirely in physical memory",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 25,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "What is a zombie process?",
+        "options": [
+          "A process that is waiting for user input",
+          "A process whose parent has terminated",
+          "A terminated process whose entry stays in the process table until its parent reads its exit status",
+          "A process that uses 100% of the CPU forever"
+        ],
+        "correct_answer": "A terminated process whose entry stays in the process table until its parent reads its exit status",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 26,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "Which statement about a mutex and a semaphore is correct?",
+        "options": [
+          "Semaphores can only be used between threads of one process",
+          "A mutex can hold a count greater than one",
+          "A mutex should be released only by the thread that acquired it",
+          "A binary semaphore can never be used for mutual exclusion"
+        ],
+        "correct_answer": "A mutex should be released only by the thread that acquired it",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 27,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "Belady's anomaly can occur with which page replacement algorithm?",
+        "options": [
+          "FIFO",
+          "Optimal",
+          "LRU",
+          "Both LRU and Optimal"
+        ],
+        "correct_answer": "FIFO",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 28,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "What is thrashing?",
+        "options": [
+          "A cache miss on every instruction",
+          "Excessive paging that causes very low CPU utilization",
+          "The CPU running at maximum clock speed",
+          "The disk becoming completely full"
+        ],
+        "correct_answer": "Excessive paging that causes very low CPU utilization",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 29,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "What is an orphan process?",
+        "options": [
+          "A process created by a system call",
+          "A running process whose parent has terminated; it is adopted by init/systemd",
+          "A process with no allocated memory",
+          "A process that has finished but is not yet cleaned up"
+        ],
+        "correct_answer": "A running process whose parent has terminated; it is adopted by init/systemd",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 30,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "What does a TLB (Translation Lookaside Buffer) do?",
+        "options": [
+          "Holds the process control blocks",
+          "Caches recent page table entries to speed up address translation",
+          "Buffers data going to the disk",
+          "Stores the contents of recently used files"
+        ],
+        "correct_answer": "Caches recent page table entries to speed up address translation",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 31,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "The Banker's algorithm is used for:",
+        "options": [
+          "Deadlock prevention",
+          "Disk scheduling",
+          "Deadlock avoidance",
+          "CPU scheduling"
+        ],
+        "correct_answer": "Deadlock avoidance",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 32,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "What does copy-on-write do after fork()?",
+        "options": [
+          "Swaps the parent's pages to disk",
+          "Parent and child share pages until one of them modifies a page",
+          "Copies all pages to the child immediately",
+          "Gives the child no memory until it calls exec"
+        ],
+        "correct_answer": "Parent and child share pages until one of them modifies a page",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 33,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "When is a spinlock preferred over a mutex?",
+        "options": [
+          "When the critical section performs disk I/O",
+          "For very short critical sections on a multiprocessor system",
+          "When the thread should sleep while waiting",
+          "For long critical sections on a single-CPU system"
+        ],
+        "correct_answer": "For very short critical sections on a multiprocessor system",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 34,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "What is the convoy effect in FCFS scheduling?",
+        "options": [
+          "Short processes get stuck waiting behind one long CPU-bound process",
+          "Processes are executed in random order",
+          "The CPU is overloaded by too many interrupts",
+          "Many processes are waiting for the same page"
+        ],
+        "correct_answer": "Short processes get stuck waiting behind one long CPU-bound process",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 35,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "Which of the following causes internal fragmentation?",
+        "options": [
+          "Swapping a process to disk",
+          "Using a TLB",
+          "Allocating memory in fixed-size blocks or pages",
+          "Variable-size partitions leaving many small free holes"
+        ],
+        "correct_answer": "Allocating memory in fixed-size blocks or pages",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 36,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "Which IPC mechanism is generally the fastest?",
+        "options": [
+          "Pipes",
+          "Message queues",
+          "Sockets",
+          "Shared memory"
+        ],
+        "correct_answer": "Shared memory",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 37,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "What is priority inversion?",
+        "options": [
+          "A high-priority process is blocked by a lower-priority process holding a needed resource",
+          "Low-priority processes always run before high-priority ones",
+          "Priority values wrap around after an overflow",
+          "Equal-priority processes run in reverse order"
+        ],
+        "correct_answer": "A high-priority process is blocked by a lower-priority process holding a needed resource",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 38,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "Which statement correctly distinguishes starvation from deadlock?",
+        "options": [
+          "Starvation needs a circular wait; deadlock does not",
+          "They are the same thing",
+          "Deadlock affects only one process; starvation affects all",
+          "In starvation a process waits indefinitely while others keep running; in deadlock a set of processes\nwait on each other forever"
+        ],
+        "correct_answer": "In starvation a process waits indefinitely while others keep running; in deadlock a set of processes\nwait on each other forever",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 39,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "A semaphore initialized to 0 is typically used for:",
+        "options": [
+          "Letting any number of processes pass wait() immediately",
+          "Disabling interrupts",
+          "Mutual exclusion of a critical section",
+          "Making one process wait until another signals an event"
+        ],
+        "correct_answer": "Making one process wait until another signals an event",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 40,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "Which technique is commonly used to solve priority inversion?",
+        "options": [
+          "Priority inheritance",
+          "Demand paging",
+          "Spooling",
+          "Round Robin scheduling"
+        ],
+        "correct_answer": "Priority inheritance",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 41,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "What is a key drawback of cooperative (non-preemptive) multitasking?",
+        "options": [
+          "Context switches are impossible",
+          "It requires special hardware timers",
+          "Processes cannot share memory",
+          "One process that never yields can hang the whole system"
+        ],
+        "correct_answer": "One process that never yields can hang the whole system",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 42,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "In Unix, what happens to hard links and soft (symbolic) links when the\noriginal file name is deleted?",
+        "options": [
+          "Both links break",
+          "Both links keep working",
+          "The soft link breaks, while the hard link still gives access to the data",
+          "The hard link breaks, while the soft link still works"
+        ],
+        "correct_answer": "The soft link breaks, while the hard link still gives access to the data",
+        "answer_letter": "C"
+      }
+    ],
+    "Hard": [
+      {
+        "question_num": 43,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "What does the exec() family of calls do?",
+        "options": [
+          "Duplicates the address space of the process",
+          "Terminates the process immediately",
+          "Replaces the current process's memory image with a new program, keeping the same PID",
+          "Creates a new child process"
+        ],
+        "correct_answer": "Replaces the current process's memory image with a new program, keeping the same PID",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 44,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "Why do operating systems usually approximate LRU (e.g., clock /\nsecond-chance) instead of implementing it exactly?",
+        "options": [
+          "LRU needs knowledge of future references",
+          "LRU suffers from Belady's anomaly",
+          "LRU cannot be used with paging",
+          "Exact LRU needs an update on every memory reference, which is too expensive"
+        ],
+        "correct_answer": "Exact LRU needs an update on every memory reference, which is too expensive",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 45,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "Why can the Optimal page replacement algorithm not be implemented in a\nreal system?",
+        "options": [
+          "It causes more page faults than FIFO",
+          "It requires knowledge of future page references",
+          "It suffers from Belady's anomaly",
+          "It needs too many frames"
+        ],
+        "correct_answer": "It requires knowledge of future page references",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 46,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "Why should a thread re-check its condition in a while loop (not an if) after\nwaking from a condition variable wait?",
+        "options": [
+          "The loop speeds up the context switch",
+          "The OS may delete the condition variable otherwise",
+          "The condition may no longer be true by the time it runs (spurious wakeups or another thread got\nthere first)",
+          "wait() always returns immediately"
+        ],
+        "correct_answer": "The condition may no longer be true by the time it runs (spurious wakeups or another thread got\nthere first)",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 47,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "What is the working set of a process?",
+        "options": [
+          "All pages in its virtual address space",
+          "The pages it has referenced in a recent time window; keeping them in memory helps prevent\nthrashing",
+          "The pages shared with other processes",
+          "The pages swapped out to disk"
+        ],
+        "correct_answer": "The pages it has referenced in a recent time window; keeping them in memory helps prevent\nthrashing",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 48,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "What does the dirty (modified) bit in a page table entry indicate?",
+        "options": [
+          "The page was modified and must be written to disk before it is replaced",
+          "The page contains corrupted data",
+          "The page is shared by several processes",
+          "The page is locked in memory"
+        ],
+        "correct_answer": "The page was modified and must be written to disk before it is replaced",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 49,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "In a typical multilevel feedback queue scheduler, what happens to a\nprocess that uses its entire time quantum?",
+        "options": [
+          "It is moved to a higher-priority queue",
+          "It stays at the same priority forever",
+          "It is terminated",
+          "It is moved to a lower-priority queue"
+        ],
+        "correct_answer": "It is moved to a lower-priority queue",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 50,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "In the readers-writers solution that gives readers priority, which group\ncan starve?",
+        "options": [
+          "Readers",
+          "Writers",
+          "Neither; starvation is impossible",
+          "Both groups equally"
+        ],
+        "correct_answer": "Writers",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 51,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "Why must the TLB be flushed on a context switch unless its entries are\ntagged with address-space identifiers (ASIDs)?",
+        "options": [
+          "The TLB has too little capacity",
+          "The TLB stores only kernel pages",
+          "Physical addresses change during a context switch",
+          "Different processes use the same virtual addresses for different physical pages"
+        ],
+        "correct_answer": "Different processes use the same virtual addresses for different physical pages",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 52,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "What is a futex in Linux?",
+        "options": [
+          "A system call used only to create threads",
+          "A file system type",
+          "A mechanism where locking is done in user space and the kernel is involved only under contention",
+          "A page replacement policy"
+        ],
+        "correct_answer": "A mechanism where locking is done in user space and the kernel is involved only under contention",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 53,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "What is the 'thundering herd' problem?",
+        "options": [
+          "A burst of page faults after a context switch",
+          "A disk head repeatedly sweeping between innermost and outermost tracks",
+          "Many waiting processes are woken for one event, but only one can proceed, wasting CPU time",
+          "Too many processes created by fork()"
+        ],
+        "correct_answer": "Many waiting processes are woken for one event, but only one can proceed, wasting CPU time",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 54,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "Which data structure does the Linux Completely Fair Scheduler (CFS) use\nto pick the next task?",
+        "options": [
+          "A red-black tree ordered by virtual runtime",
+          "A min-heap ordered by burst time",
+          "An array of 140 priority lists",
+          "A FIFO queue"
+        ],
+        "correct_answer": "A red-black tree ordered by virtual runtime",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 55,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "What does the priority ceiling protocol guarantee?",
+        "options": [
+          "It prevents deadlock and limits priority inversion to at most one critical section",
+          "It eliminates the need for locks",
+          "It prevents page faults",
+          "It guarantees fair scheduling for all processes"
+        ],
+        "correct_answer": "It prevents deadlock and limits priority inversion to at most one critical section",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 56,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "Why is LRU free from Belady's anomaly?",
+        "options": [
+          "It uses the future reference string",
+          "It always replaces the page with the fewest references",
+          "It never causes a page fault",
+          "It is a stack algorithm: pages held with n frames are always a subset of those held with n+1 frames"
+        ],
+        "correct_answer": "It is a stack algorithm: pages held with n frames are always a subset of those held with n+1 frames",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 57,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "How does vfork() differ from fork()?",
+        "options": [
+          "vfork() never returns to the parent",
+          "The child shares the parent's address space and the parent is suspended until the child calls exec\nor exits",
+          "vfork() copies all memory before returning",
+          "vfork() creates a thread instead of a process"
+        ],
+        "correct_answer": "The child shares the parent's address space and the parent is suspended until the child calls exec\nor exits",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 58,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "What is the ABA problem in lock-free programming?",
+        "options": [
+          "A page being replaced and loaded again immediately",
+          "A compare-and-swap succeeds because a value went from A to B and back to A, although the state\nchanged in between",
+          "Two threads acquiring locks A and B in opposite order",
+          "A process being scheduled twice in a row"
+        ],
+        "correct_answer": "A compare-and-swap succeeds because a value went from A to B and back to A, although the state\nchanged in between",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 59,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "What is the key idea of Read-Copy-Update (RCU)?",
+        "options": [
+          "Every read copies the data into the CPU cache",
+          "Readers access data without locks while writers publish a modified copy and wait for old readers to\nfinish",
+          "Writers update data in place while readers are blocked",
+          "Readers and writers must take the same mutex"
+        ],
+        "correct_answer": "Readers access data without locks while writers publish a modified copy and wait for old readers to\nfinish",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 60,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "What does a memory barrier (fence) do?",
+        "options": [
+          "Prevents the compiler and CPU from reordering memory operations across it",
+          "Blocks access to kernel memory from user mode",
+          "Protects a memory region from being swapped out",
+          "Limits the amount of memory a process can allocate"
+        ],
+        "correct_answer": "Prevents the compiler and CPU from reordering memory operations across it",
+        "answer_letter": "A"
+      }
+    ]
+  },
+  "Computer Networks": {
+    "Easy": [
+      {
+        "question_num": 1,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "What does IP stand for in 'IP address'?",
+        "options": [
+          "Interconnect Port",
+          "Internet Protocol",
+          "Internet Process",
+          "Internal Protocol"
+        ],
+        "correct_answer": "Internet Protocol",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 2,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "What does LAN stand for?",
+        "options": [
+          "Linked Area Node",
+          "Large Area Network",
+          "Local Access Network",
+          "Local Area Network"
+        ],
+        "correct_answer": "Local Area Network",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 3,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "Which protocol is used to browse web pages?",
+        "options": [
+          "HTTP",
+          "SSH",
+          "FTP",
+          "SMTP"
+        ],
+        "correct_answer": "HTTP",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 4,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "Which protocol is used to send email?",
+        "options": [
+          "SMTP",
+          "HTTP",
+          "DNS",
+          "FTP"
+        ],
+        "correct_answer": "SMTP",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 5,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "Which device connects different networks and forwards packets between\nthem?",
+        "options": [
+          "Router",
+          "Hub",
+          "Network cable",
+          "Repeater"
+        ],
+        "correct_answer": "Router",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 6,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "What does DNS do?",
+        "options": [
+          "Assigns IP addresses to devices",
+          "Encrypts web traffic",
+          "Blocks malicious websites",
+          "Translates domain names into IP addresses"
+        ],
+        "correct_answer": "Translates domain names into IP addresses",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 7,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "How many layers does the OSI model have?",
+        "options": [
+          "5",
+          "7",
+          "6",
+          "4"
+        ],
+        "correct_answer": "7",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 8,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "At which OSI layer does the IP protocol operate?",
+        "options": [
+          "Session layer",
+          "Data link layer",
+          "Network layer",
+          "Transport layer"
+        ],
+        "correct_answer": "Network layer",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 9,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "Which of the following is a valid IPv4 address?",
+        "options": [
+          "256.1.1.1",
+          "192.168.1.1.1",
+          "192.168.1.1",
+          "192.168.1"
+        ],
+        "correct_answer": "192.168.1.1",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 10,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "What is the default port of HTTP?",
+        "options": [
+          "80",
+          "443",
+          "21",
+          "25"
+        ],
+        "correct_answer": "80",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 11,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "Which of the following protocols is connection-oriented?",
+        "options": [
+          "IP",
+          "TCP",
+          "UDP",
+          "ICMP"
+        ],
+        "correct_answer": "TCP",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 12,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "What does URL stand for?",
+        "options": [
+          "Universal Reference Link",
+          "Uniform Resource Locator",
+          "Unified Resource Location",
+          "Uniform Retrieval Locator"
+        ],
+        "correct_answer": "Uniform Resource Locator",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 13,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "What is the default port of HTTPS?",
+        "options": [
+          "22",
+          "80",
+          "8080",
+          "443"
+        ],
+        "correct_answer": "443",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 14,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "How many bits are there in a MAC address?",
+        "options": [
+          "32",
+          "128",
+          "48",
+          "64"
+        ],
+        "correct_answer": "48",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 15,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "How many bits are there in an IPv4 address?",
+        "options": [
+          "32",
+          "128",
+          "64",
+          "16"
+        ],
+        "correct_answer": "32",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 16,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "Which device operates at the data link layer (Layer 2)?",
+        "options": [
+          "Repeater",
+          "Modem",
+          "Hub",
+          "Switch"
+        ],
+        "correct_answer": "Switch",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 17,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "Which protocol does the ping command use?",
+        "options": [
+          "UDP",
+          "ARP",
+          "ICMP",
+          "TCP"
+        ],
+        "correct_answer": "ICMP",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 18,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "Which of the following is a private IP address?",
+        "options": [
+          "172.32.5.1",
+          "11.0.0.1",
+          "8.8.8.8",
+          "192.168.1.10"
+        ],
+        "correct_answer": "192.168.1.10",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 19,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "Which transport protocol is typically used for live video streaming and\nonline games, where speed matters more than guaranteed delivery?",
+        "options": [
+          "UDP",
+          "TCP",
+          "FTP",
+          "ICMP"
+        ],
+        "correct_answer": "UDP",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 20,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "What is the purpose of ARP?",
+        "options": [
+          "To map an IP address to a MAC address",
+          "To assign IP addresses automatically",
+          "To encrypt data at the link layer",
+          "To map a domain name to an IP address"
+        ],
+        "correct_answer": "To map an IP address to a MAC address",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 21,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "What does DHCP do?",
+        "options": [
+          "Routes packets between networks",
+          "Translates domain names to IP addresses",
+          "Automatically assigns IP addresses to devices on a network",
+          "Encrypts data between hosts"
+        ],
+        "correct_answer": "Automatically assigns IP addresses to devices on a network",
+        "answer_letter": "C"
+      }
+    ],
+    "Medium": [
+      {
+        "question_num": 22,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "What is the correct order of the TCP three-way handshake?",
+        "options": [
+          "ACK, SYN, FIN",
+          "SYN, ACK, SYN-ACK",
+          "SYN, FIN, ACK",
+          "SYN, SYN-ACK, ACK"
+        ],
+        "correct_answer": "SYN, SYN-ACK, ACK",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 23,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "What is the main difference between HTTP and HTTPS?",
+        "options": [
+          "HTTPS uses UDP instead of TCP",
+          "HTTPS does not use port numbers",
+          "HTTPS encrypts the communication using TLS",
+          "HTTPS only works on local networks"
+        ],
+        "correct_answer": "HTTPS encrypts the communication using TLS",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 24,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "What is a subnet mask used for?",
+        "options": [
+          "To find the DNS server",
+          "To assign port numbers",
+          "To separate the network part and the host part of an IP address",
+          "To encrypt the IP address"
+        ],
+        "correct_answer": "To separate the network part and the host part of an IP address",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 25,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "Which port does DNS use by default?",
+        "options": [
+          "53",
+          "143",
+          "67",
+          "110"
+        ],
+        "correct_answer": "53",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 26,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "Which HTTP status code means 'Not Found'?",
+        "options": [
+          "301",
+          "404",
+          "500",
+          "403"
+        ],
+        "correct_answer": "404",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 27,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "What does NAT do?",
+        "options": [
+          "Translates domain names to IP addresses",
+          "Translates private IP addresses to a public IP address",
+          "Assigns MAC addresses",
+          "Encrypts packets at the network layer"
+        ],
+        "correct_answer": "Translates private IP addresses to a public IP address",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 28,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "Which HTTP method is NOT idempotent by definition?",
+        "options": [
+          "PUT",
+          "DELETE",
+          "GET",
+          "POST"
+        ],
+        "correct_answer": "POST",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 29,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "How does a switch differ from a hub?",
+        "options": [
+          "A switch broadcasts every frame to all ports",
+          "A switch forwards frames only to the destination port using a MAC table; a hub sends them to all\nports",
+          "A hub uses MAC addresses to filter traffic",
+          "A switch works only at the physical layer"
+        ],
+        "correct_answer": "A switch forwards frames only to the destination port using a MAC table; a hub sends them to all\nports",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 30,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "What is the purpose of the TTL field in an IP packet?",
+        "options": [
+          "It encrypts the packet payload",
+          "It sets how long a web page stays cached",
+          "It stores the packet's priority",
+          "It limits the packet's lifetime (in hops) to prevent endless looping"
+        ],
+        "correct_answer": "It limits the packet's lifetime (in hops) to prevent endless looping",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 31,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "Which layer provides end-to-end delivery between applications and uses\nport numbers?",
+        "options": [
+          "Data link layer",
+          "Transport layer",
+          "Session layer",
+          "Network layer"
+        ],
+        "correct_answer": "Transport layer",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 32,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "When you type a URL for the first time (nothing cached), what happens\nfirst?",
+        "options": [
+          "The browser renders the page",
+          "The server sends the HTML page",
+          "The TLS handshake",
+          "A DNS lookup to find the server's IP address"
+        ],
+        "correct_answer": "A DNS lookup to find the server's IP address",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 33,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "What is the difference between HTTP status codes 301 and 302?",
+        "options": [
+          "301 is a permanent redirect; 302 is a temporary redirect",
+          "They are identical",
+          "301 is a client error; 302 is a server error",
+          "301 means success; 302 means failure"
+        ],
+        "correct_answer": "301 is a permanent redirect; 302 is a temporary redirect",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 34,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "How many usable host addresses are there in a /24 IPv4 network?",
+        "options": [
+          "254",
+          "253",
+          "255",
+          "256"
+        ],
+        "correct_answer": "254",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 35,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "Which TCP flag is used to close a connection gracefully?",
+        "options": [
+          "SYN",
+          "PSH",
+          "FIN",
+          "RST"
+        ],
+        "correct_answer": "FIN",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 36,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "What is the role of a port number?",
+        "options": [
+          "To identify the network the host belongs to",
+          "To identify the router's location",
+          "To identify which application or process on a host should receive the data",
+          "To identify the physical network card"
+        ],
+        "correct_answer": "To identify which application or process on a host should receive the data",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 37,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "Which mechanism does TCP use for flow control?",
+        "options": [
+          "The slow-start threshold only",
+          "A sliding window using the receiver's advertised window size",
+          "The IP checksum",
+          "The three-way handshake"
+        ],
+        "correct_answer": "A sliding window using the receiver's advertised window size",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 38,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "What is the difference between flow control and congestion control?",
+        "options": [
+          "Congestion control is done only by the receiver",
+          "Flow control works only in UDP",
+          "Flow control stops the sender from overwhelming the receiver; congestion control stops it from\noverwhelming the network",
+          "They are two names for the same thing"
+        ],
+        "correct_answer": "Flow control stops the sender from overwhelming the receiver; congestion control stops it from\noverwhelming the network",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 39,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "What is the difference between a MAC address and an IP address?",
+        "options": [
+          "They are both assigned by DHCP",
+          "An IP address is burned into the network card",
+          "A MAC address is a link-layer hardware address; an IP address is a logical address that depends\non the network",
+          "A MAC address can be changed only by the ISP"
+        ],
+        "correct_answer": "A MAC address is a link-layer hardware address; an IP address is a logical address that depends\non the network",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 40,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "How does traceroute discover the routers on a path?",
+        "options": [
+          "It asks the DNS server for the route",
+          "It sends packets with increasing TTL values and reads the ICMP Time Exceeded replies",
+          "It broadcasts ARP requests to every router",
+          "It reads the routing table of the destination host"
+        ],
+        "correct_answer": "It sends packets with increasing TTL values and reads the ICMP Time Exceeded replies",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 41,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "What is the difference between HTTP status codes 401 and 403?",
+        "options": [
+          "They have the same meaning",
+          "401 means not authenticated; 403 means authenticated but not allowed",
+          "401 is a server error; 403 is a redirect",
+          "401 means forbidden; 403 means unauthorized login is missing"
+        ],
+        "correct_answer": "401 means not authenticated; 403 means authenticated but not allowed",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 42,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "What is the size of the UDP header?",
+        "options": [
+          "16 bytes",
+          "4 bytes",
+          "20 bytes",
+          "8 bytes"
+        ],
+        "correct_answer": "8 bytes",
+        "answer_letter": "D"
+      }
+    ],
+    "Hard": [
+      {
+        "question_num": 43,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "How many usable host addresses are there in a /20 IPv4 network?",
+        "options": [
+          "1022",
+          "4094",
+          "4096",
+          "2046"
+        ],
+        "correct_answer": "4094",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 44,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "Which DNS record type makes one domain name an alias of another?",
+        "options": [
+          "MX",
+          "A",
+          "CNAME",
+          "PTR"
+        ],
+        "correct_answer": "CNAME",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 45,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "What does the 'Host' header in HTTP/1.1 make possible?",
+        "options": [
+          "Choosing between TCP and UDP",
+          "Encrypting the request body",
+          "Hosting multiple websites on a single IP address (virtual hosting)",
+          "Caching responses in the browser"
+        ],
+        "correct_answer": "Hosting multiple websites on a single IP address (virtual hosting)",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 46,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "What is the purpose of the TCP TIME_WAIT state?",
+        "options": [
+          "To limit the bandwidth of the connection",
+          "To wait for the user to type a URL",
+          "To allow the server to resend its SYN",
+          "To make sure the final ACK is delivered and old duplicate packets expire"
+        ],
+        "correct_answer": "To make sure the final ACK is delivered and old duplicate packets expire",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 47,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "What does Nagle's algorithm do?",
+        "options": [
+          "Combines small outgoing segments to reduce the number of tiny packets",
+          "Encrypts small packets",
+          "Splits large packets into smaller ones",
+          "Increases the congestion window faster"
+        ],
+        "correct_answer": "Combines small outgoing segments to reduce the number of tiny packets",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 48,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "Which feature does HTTP/2 add compared to HTTP/1.1?",
+        "options": [
+          "Removing headers completely",
+          "Only allowing the GET method",
+          "Multiplexing several streams over a single TCP connection",
+          "Switching from TCP to UDP"
+        ],
+        "correct_answer": "Multiplexing several streams over a single TCP connection",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 49,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "HTTP/3 runs on top of which transport?",
+        "options": [
+          "QUIC over UDP",
+          "TCP",
+          "SCTP",
+          "ICMP"
+        ],
+        "correct_answer": "QUIC over UDP",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 50,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "How does TCP slow start work?",
+        "options": [
+          "The receiver slowly increases its buffer size",
+          "The sender transmits at full speed and slows down on the first ACK",
+          "The window grows by exactly one segment per second",
+          "The congestion window starts small and roughly doubles every round trip until a threshold"
+        ],
+        "correct_answer": "The congestion window starts small and roughly doubles every round trip until a threshold",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 51,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "What is the purpose of CORS in web browsers?",
+        "options": [
+          "It lets servers specify which other origins may access their resources",
+          "It resolves domain names faster",
+          "It compresses responses",
+          "It encrypts cookies"
+        ],
+        "correct_answer": "It lets servers specify which other origins may access their resources",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 52,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "When does TCP perform a fast retransmit?",
+        "options": [
+          "When the connection is closed",
+          "After receiving three duplicate ACKs, without waiting for the timeout",
+          "When the receiver window becomes zero",
+          "After every 3 seconds"
+        ],
+        "correct_answer": "After receiving three duplicate ACKs, without waiting for the timeout",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 53,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "What does a SYN flood attack do?",
+        "options": [
+          "Exhausts the server's half-open connection queue by sending SYNs without completing the\nhandshake",
+          "Steals session cookies",
+          "Poisons the DNS cache",
+          "Floods the network with ping packets"
+        ],
+        "correct_answer": "Exhausts the server's half-open connection queue by sending SYNs without completing the\nhandshake",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 54,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "Which protocol exchanges routing information between autonomous\nsystems on the Internet?",
+        "options": [
+          "ARP",
+          "RIP",
+          "OSPF",
+          "BGP"
+        ],
+        "correct_answer": "BGP",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 55,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "Which algorithm does OSPF use to compute routes?",
+        "options": [
+          "Bellman-Ford",
+          "Dijkstra's shortest path algorithm",
+          "Floyd-Warshall",
+          "Prim's algorithm"
+        ],
+        "correct_answer": "Dijkstra's shortest path algorithm",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 56,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "What is the count-to-infinity problem?",
+        "options": [
+          "A TCP sequence number overflowing",
+          "Distance-vector routers slowly increment the cost of an unreachable route; split horizon helps\nreduce it",
+          "DNS recursion that never ends",
+          "A switch learning too many MAC addresses"
+        ],
+        "correct_answer": "Distance-vector routers slowly increment the cost of an unreachable route; split horizon helps\nreduce it",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 57,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "How does Path MTU Discovery work?",
+        "options": [
+          "It splits all packets into 512 bytes",
+          "It asks the DNS server for the MTU",
+          "It sends packets with the Don't Fragment bit set and reads ICMP 'Fragmentation Needed' replies",
+          "It uses ARP to learn the MTU of each router"
+        ],
+        "correct_answer": "It sends packets with the Don't Fragment bit set and reads ICMP 'Fragmentation Needed' replies",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 58,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "What is the 'silly window syndrome' in TCP?",
+        "options": [
+          "A deadlock between SYN and FIN packets",
+          "The sender window growing without limit",
+          "Packets arriving out of order",
+          "Sender and receiver exchange tiny segments because of small window advertisements"
+        ],
+        "correct_answer": "Sender and receiver exchange tiny segments because of small window advertisements",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 59,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "How many round trips does a full TLS 1.3 handshake need before\napplication data can be sent?",
+        "options": [
+          "3 round trips",
+          "0 round trips",
+          "2 round trips",
+          "1 round trip"
+        ],
+        "correct_answer": "1 round trip",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 60,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "What is anycast?",
+        "options": [
+          "One IP address is announced by several servers and traffic goes to the nearest one",
+          "Sending a packet to a selected group of hosts",
+          "Sending a packet to every host on the network",
+          "Sending a packet to one specific host"
+        ],
+        "correct_answer": "One IP address is announced by several servers and traffic goes to the nearest one",
+        "answer_letter": "A"
+      }
+    ]
+  },
+  "OOP": {
+    "Easy": [
+      {
+        "question_num": 1,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "Which of the following is NOT a pillar of object-oriented programming?",
+        "options": [
+          "Encapsulation",
+          "Inheritance",
+          "Compilation",
+          "Polymorphism"
+        ],
+        "correct_answer": "Compilation",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 2,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "What is an object in OOP?",
+        "options": [
+          "A primitive data type",
+          "An instance of a class",
+          "A function that returns a value",
+          "A blueprint for creating classes"
+        ],
+        "correct_answer": "An instance of a class",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 3,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "What is a class in OOP?",
+        "options": [
+          "A blueprint or template for creating objects",
+          "A type of loop",
+          "A variable that stores a number",
+          "A running instance of a program"
+        ],
+        "correct_answer": "A blueprint or template for creating objects",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 4,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "In Java, which keyword is used to create a new object?",
+        "options": [
+          "create",
+          "object",
+          "make",
+          "new"
+        ],
+        "correct_answer": "new",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 5,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "What does encapsulation mean?",
+        "options": [
+          "Bundling data and the methods that work on it, and restricting direct access to the data",
+          "Creating many methods with the same name",
+          "Hiding the class name from the compiler",
+          "Acquiring properties from a parent class"
+        ],
+        "correct_answer": "Bundling data and the methods that work on it, and restricting direct access to the data",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 6,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "What is inheritance?",
+        "options": [
+          "A class containing objects of another class",
+          "A class acquiring the properties and methods of another class",
+          "Defining a method more than once",
+          "Creating several objects of the same class"
+        ],
+        "correct_answer": "A class acquiring the properties and methods of another class",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 7,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "What is a constructor?",
+        "options": [
+          "A method that deletes an object",
+          "A method that can only be static",
+          "A special method that is called when an object is created",
+          "A method that must be called manually after creation"
+        ],
+        "correct_answer": "A special method that is called when an object is created",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 8,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "Which access modifier makes a member accessible only inside its own\nclass?",
+        "options": [
+          "protected",
+          "default (package-private)",
+          "public",
+          "private"
+        ],
+        "correct_answer": "private",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 9,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "What does polymorphism mean?",
+        "options": [
+          "The same interface can show different behaviour for different objects",
+          "Storing many values in one variable",
+          "Creating a class from another class",
+          "Hiding data inside a class"
+        ],
+        "correct_answer": "The same interface can show different behaviour for different objects",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 10,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "What is method overloading?",
+        "options": [
+          "Hiding a method from other classes",
+          "Calling a method from inside itself",
+          "Defining several methods with the same name but different parameters in the same class",
+          "Redefining a parent class method in a child class"
+        ],
+        "correct_answer": "Defining several methods with the same name but different parameters in the same class",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 11,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "What is method overriding?",
+        "options": [
+          "Making a method private",
+          "Calling two methods at once",
+          "A subclass providing its own implementation of a method already defined in its parent class",
+          "Defining the same method name with different parameters"
+        ],
+        "correct_answer": "A subclass providing its own implementation of a method already defined in its parent class",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 12,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "What is abstraction?",
+        "options": [
+          "Hiding implementation details and showing only the essential features",
+          "Combining data and methods in a single unit",
+          "Making all members public",
+          "Copying one object into another"
+        ],
+        "correct_answer": "Hiding implementation details and showing only the essential features",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 13,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "Which of the following is an example of compile-time polymorphism?",
+        "options": [
+          "Method overloading",
+          "Virtual functions",
+          "Method overriding",
+          "Interface implementation"
+        ],
+        "correct_answer": "Method overloading",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 14,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "Which of the following is an example of run-time polymorphism?",
+        "options": [
+          "Operator overloading",
+          "Constructor overloading",
+          "Method overloading",
+          "Method overriding"
+        ],
+        "correct_answer": "Method overriding",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 15,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "What is an abstract class?",
+        "options": [
+          "A class with only static methods",
+          "A class that cannot have any methods",
+          "A class that cannot be instantiated directly and may contain abstract methods",
+          "A class that can only be used once"
+        ],
+        "correct_answer": "A class that cannot be instantiated directly and may contain abstract methods",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 16,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "Which is true about interfaces and classes in Java?",
+        "options": [
+          "A class can extend multiple classes",
+          "A class can implement multiple interfaces but extend only one class",
+          "An interface can extend only a class",
+          "A class can implement only one interface"
+        ],
+        "correct_answer": "A class can implement multiple interfaces but extend only one class",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 17,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "What does the 'this' keyword refer to?",
+        "options": [
+          "The parent class",
+          "The current object",
+          "The class's static members",
+          "The most recently created object"
+        ],
+        "correct_answer": "The current object",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 18,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "What does a 'static' member of a class mean?",
+        "options": [
+          "It belongs to the class itself, not to any particular object",
+          "It is accessible only inside the class",
+          "It is created every time an object is created",
+          "It cannot be changed after it is set"
+        ],
+        "correct_answer": "It belongs to the class itself, not to any particular object",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 19,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "What is the return type of a constructor?",
+        "options": [
+          "int",
+          "The class type",
+          "A constructor has no return type",
+          "void"
+        ],
+        "correct_answer": "A constructor has no return type",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 20,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "What is the diamond problem?",
+        "options": [
+          "An infinite loop in constructors",
+          "Ambiguity when a class inherits from two classes that both inherit from the same base class",
+          "Two classes having the same name",
+          "A class having four constructors"
+        ],
+        "correct_answer": "Ambiguity when a class inherits from two classes that both inherit from the same base class",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 21,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "Does Java support multiple inheritance of classes?",
+        "options": [
+          "Only inside the same package",
+          "Yes, using the extends keyword twice",
+          "Yes, but only for abstract classes",
+          "No, only through interfaces"
+        ],
+        "correct_answer": "No, only through interfaces",
+        "answer_letter": "D"
+      }
+    ],
+    "Medium": [
+      {
+        "question_num": 22,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "What is the difference between composition and inheritance?",
+        "options": [
+          "Composition models 'is-a'; inheritance models 'has-a'",
+          "Composition is only for interfaces; inheritance is only for classes",
+          "There is no difference",
+          "Composition models a 'has-a' relationship; inheritance models an 'is-a' relationship"
+        ],
+        "correct_answer": "Composition models a 'has-a' relationship; inheritance models an 'is-a' relationship",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 23,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "What is the purpose of a copy constructor?",
+        "options": [
+          "To delete an existing object",
+          "To copy a class definition",
+          "To convert an object into a string",
+          "To create a new object as a copy of an existing object"
+        ],
+        "correct_answer": "To create a new object as a copy of an existing object",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 24,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "In C++, when is a destructor called for a stack-allocated object?",
+        "options": [
+          "When the object goes out of scope",
+          "Only when the program crashes",
+          "When the program starts",
+          "Only when delete is called"
+        ],
+        "correct_answer": "When the object goes out of scope",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 25,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "What is the difference between shallow copy and deep copy?",
+        "options": [
+          "A shallow copy copies references of nested objects; a deep copy also copies the nested objects",
+          "A deep copy is always faster",
+          "A shallow copy copies only primitive fields; a deep copy copies only references",
+          "They are the same thing"
+        ],
+        "correct_answer": "A shallow copy copies references of nested objects; a deep copy also copies the nested objects",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 26,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "What is a virtual function in C++?",
+        "options": [
+          "A function that exists only in memory",
+          "A function with no body that must be inline",
+          "A function that cannot be overridden",
+          "A function whose call is resolved at run time based on the actual object type"
+        ],
+        "correct_answer": "A function whose call is resolved at run time based on the actual object type",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 27,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "What is the difference between == and equals() for objects in Java?",
+        "options": [
+          "== compares content; equals() compares references",
+          "Both always compare content",
+          "== compares references; equals() compares content when it is overridden",
+          "Both always compare references"
+        ],
+        "correct_answer": "== compares references; equals() compares content when it is overridden",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 28,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "What does the 'S' in SOLID stand for?",
+        "options": [
+          "Static Binding Principle",
+          "Single Responsibility Principle",
+          "Singleton Principle",
+          "Separation of Interfaces"
+        ],
+        "correct_answer": "Single Responsibility Principle",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 29,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "What happens when a Java class is declared final?",
+        "options": [
+          "Its methods cannot be called",
+          "It cannot be extended",
+          "It must be abstract",
+          "Its objects cannot be created"
+        ],
+        "correct_answer": "It cannot be extended",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 30,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "Can a static method be overridden in Java?",
+        "options": [
+          "Yes, but only if it is public",
+          "Yes, like any instance method",
+          "Only if the class is abstract",
+          "No; a static method in a subclass hides the parent method instead"
+        ],
+        "correct_answer": "No; a static method in a subclass hides the parent method instead",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 31,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "What does the Liskov Substitution Principle state?",
+        "options": [
+          "A class should have only one reason to change",
+          "High-level modules should not depend on low-level modules",
+          "Classes should be open for extension but closed for modification",
+          "Objects of a subclass should be usable wherever the parent class is expected without breaking\ncorrectness"
+        ],
+        "correct_answer": "Objects of a subclass should be usable wherever the parent class is expected without breaking\ncorrectness",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 32,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "Can an abstract class in Java have a constructor?",
+        "options": [
+          "No, abstract classes cannot have constructors",
+          "Yes, but it can never be called",
+          "Only if it is declared static",
+          "Yes; it runs when a subclass object is created"
+        ],
+        "correct_answer": "Yes; it runs when a subclass object is created",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 33,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "If a Java class defines no constructor, what happens?",
+        "options": [
+          "The compiler provides a default no-argument constructor",
+          "The class uses its parent class's constructor directly",
+          "A compile-time error occurs",
+          "The class cannot be instantiated"
+        ],
+        "correct_answer": "The compiler provides a default no-argument constructor",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 34,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "What does the Open/Closed Principle state?",
+        "options": [
+          "Software entities should be open for extension but closed for modification",
+          "Code should never be changed after release",
+          "Every class must be open to all other classes",
+          "Classes should always be declared final"
+        ],
+        "correct_answer": "Software entities should be open for extension but closed for modification",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 35,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "In inheritance, in which order are constructors called?",
+        "options": [
+          "Derived class constructor first, then base class",
+          "Only the derived class constructor is called",
+          "The order is random",
+          "Base class constructor first, then derived class constructor"
+        ],
+        "correct_answer": "Base class constructor first, then derived class constructor",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 36,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "Why would a class have a private constructor?",
+        "options": [
+          "To make the constructor run faster",
+          "To allow the class to be inherited by anyone",
+          "To prevent instantiation from outside the class, as in the Singleton pattern",
+          "To make the class abstract"
+        ],
+        "correct_answer": "To prevent instantiation from outside the class, as in the Singleton pattern",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 37,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "What does the Dependency Inversion Principle state?",
+        "options": [
+          "Low-level modules should control high-level modules",
+          "High-level modules should depend on abstractions, not on concrete low-level classes",
+          "Classes should be created using the new keyword only",
+          "Dependencies should be removed from all classes"
+        ],
+        "correct_answer": "High-level modules should depend on abstractions, not on concrete low-level classes",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 38,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "What is object slicing in C++?",
+        "options": [
+          "Casting a base pointer to a derived pointer",
+          "Splitting a large object into smaller objects",
+          "Copying a derived class object into a base class object by value, losing the derived part",
+          "Deleting part of an object's memory"
+        ],
+        "correct_answer": "Copying a derived class object into a base class object by value, losing the derived part",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 39,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "Why should the destructor of a polymorphic base class in C++ be virtual?",
+        "options": [
+          "So the destructor can take parameters",
+          "So the derived class destructor runs when an object is deleted through a base pointer",
+          "So the base class cannot be inherited",
+          "So the destructor runs faster"
+        ],
+        "correct_answer": "So the derived class destructor runs when an object is deleted through a base pointer",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 40,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "What does the Interface Segregation Principle state?",
+        "options": [
+          "Clients should not be forced to depend on methods they do not use",
+          "A class must hide all its interfaces",
+          "Interfaces must be implemented by exactly one class",
+          "All interfaces must have exactly one method"
+        ],
+        "correct_answer": "Clients should not be forced to depend on methods they do not use",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 41,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "What is a covariant return type?",
+        "options": [
+          "A return type that must exactly match the parent's",
+          "A method that returns different types on every call",
+          "A method that returns two values",
+          "An overriding method may return a subtype of the return type declared in the parent method"
+        ],
+        "correct_answer": "An overriding method may return a subtype of the return type declared in the parent method",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 42,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "What is the difference between aggregation and composition?",
+        "options": [
+          "They are identical",
+          "In composition the part cannot outlive the whole; in aggregation it can",
+          "Composition is used only with interfaces",
+          "In aggregation the part cannot outlive the whole; in composition it can"
+        ],
+        "correct_answer": "In composition the part cannot outlive the whole; in aggregation it can",
+        "answer_letter": "B"
+      }
+    ],
+    "Hard": [
+      {
+        "question_num": 43,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "Can a Java interface contain method implementations?",
+        "options": [
+          "Yes, but only private fields",
+          "Only if it is declared abstract",
+          "No, never",
+          "Yes, default and static methods (since Java 8)"
+        ],
+        "correct_answer": "Yes, default and static methods (since Java 8)",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 44,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "A subclass overrides a public Java method but makes it private. What\nhappens?",
+        "options": [
+          "A run-time exception is thrown when it is called",
+          "A compile-time error, because the access level cannot be reduced",
+          "It works, and the method becomes private",
+          "It works but a warning is shown"
+        ],
+        "correct_answer": "A compile-time error, because the access level cannot be reduced",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 45,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "What does the Law of Demeter suggest?",
+        "options": [
+          "A method should talk only to its immediate collaborators, not to objects reached through chains of\ncalls",
+          "Every class should have only one method",
+          "All data members should be public",
+          "Methods should never call other methods"
+        ],
+        "correct_answer": "A method should talk only to its immediate collaborators, not to objects reached through chains of\ncalls",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 46,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "In Java, are fields polymorphic like overridden methods?",
+        "options": [
+          "Yes, they are resolved at run time by the object type",
+          "Only for static fields",
+          "Yes, but only for private fields",
+          "No; field access is resolved at compile time by the reference type"
+        ],
+        "correct_answer": "No; field access is resolved at compile time by the reference type",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 47,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "What is the Rule of Three in C++?",
+        "options": [
+          "A function can have at most three overloads",
+          "If a class needs a custom destructor, copy constructor or copy assignment operator, it likely needs\nall three",
+          "A class may have at most three constructors",
+          "A class can inherit from at most three classes"
+        ],
+        "correct_answer": "If a class needs a custom destructor, copy constructor or copy assignment operator, it likely needs\nall three",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 48,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "What is the fragile base class problem?",
+        "options": [
+          "A base class that cannot be inherited",
+          "Changes in a base class can unintentionally break its derived classes",
+          "A base class with too many methods",
+          "A base class that has no constructor"
+        ],
+        "correct_answer": "Changes in a base class can unintentionally break its derived classes",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 49,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "What is the risk of calling an overridable method from a constructor in\nJava?",
+        "options": [
+          "The method can never be overridden",
+          "A compile-time error occurs",
+          "The constructor will run twice",
+          "The overridden method may run before the subclass fields are initialized"
+        ],
+        "correct_answer": "The overridden method may run before the subclass fields are initialized",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 50,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "What is a vtable (virtual table)?",
+        "options": [
+          "A table of function pointers used for dynamic dispatch of virtual functions",
+          "A table of exceptions thrown at run time",
+          "A table of all objects created in a program",
+          "A table of variable names used by the compiler"
+        ],
+        "correct_answer": "A table of function pointers used for dynamic dispatch of virtual functions",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 51,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "What does the 'explicit' keyword do on a C++ constructor?",
+        "options": [
+          "Makes the constructor virtual",
+          "Prevents the compiler from using it for implicit conversions",
+          "Makes the constructor run before main",
+          "Prevents the class from being inherited"
+        ],
+        "correct_answer": "Prevents the compiler from using it for implicit conversions",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 52,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "Why is making Square a subclass of Rectangle a classic Liskov violation?",
+        "options": [
+          "A square has fewer sides than a rectangle",
+          "A square cannot have a constructor",
+          "Setting width and height independently breaks the invariant that a square's sides are equal",
+          "Rectangle is an abstract class"
+        ],
+        "correct_answer": "Setting width and height independently breaks the invariant that a square's sides are equal",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 53,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "What is the Rule of Five in C++ (an extension of the Rule of Three)?",
+        "options": [
+          "A class should have five virtual functions",
+          "It adds the move constructor and move assignment operator to the three special functions",
+          "A class can have at most five data members",
+          "A function should have at most five parameters"
+        ],
+        "correct_answer": "It adds the move constructor and move assignment operator to the three special functions",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 54,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "In Java, what rule applies when an overriding method declares checked\nexceptions?",
+        "options": [
+          "It must throw every exception the parent throws",
+          "It may throw any checked exception",
+          "It cannot throw new or broader checked exceptions than the overridden method",
+          "It cannot throw any exception at all"
+        ],
+        "correct_answer": "It cannot throw new or broader checked exceptions than the overridden method",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 55,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "How does virtual inheritance in C++ solve the diamond problem?",
+        "options": [
+          "It forbids multiple inheritance",
+          "It makes the base class private",
+          "It ensures only one shared copy of the common base class exists in the derived object",
+          "It copies the base class twice"
+        ],
+        "correct_answer": "It ensures only one shared copy of the common base class exists in the derived object",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 56,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "Which algorithm does Python use to compute the method resolution\norder (MRO) in multiple inheritance?",
+        "options": [
+          "C3 linearization",
+          "Dijkstra's algorithm",
+          "Random resolution",
+          "Depth-first search"
+        ],
+        "correct_answer": "C3 linearization",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 57,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "Under Design by Contract, what is required of an overriding method in a\nsubtype?",
+        "options": [
+          "It must keep both preconditions and postconditions unchanged in text",
+          "It may change both freely",
+          "It must not strengthen preconditions and must not weaken postconditions",
+          "It must strengthen preconditions and weaken postconditions"
+        ],
+        "correct_answer": "It must not strengthen preconditions and must not weaken postconditions",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 58,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "For overriding methods, which parameter type change is theoretically safe\naccording to the Liskov principle?",
+        "options": [
+          "A more general (contravariant) parameter type",
+          "Any type, as long as the name is the same",
+          "A more specific (covariant) parameter type",
+          "An unrelated parameter type"
+        ],
+        "correct_answer": "A more general (contravariant) parameter type",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 59,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "In C++, what happens when a base class constructor calls a virtual\nfunction that a derived class overrides?",
+        "options": [
+          "A compile-time error occurs",
+          "The program always crashes",
+          "The base class version is called, because the derived part is not constructed yet",
+          "The derived class version is called"
+        ],
+        "correct_answer": "The base class version is called, because the derived part is not constructed yet",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 60,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "The Visitor design pattern is mainly used to emulate:",
+        "options": [
+          "Multiple inheritance",
+          "Operator overloading",
+          "Double dispatch",
+          "Lazy initialization"
+        ],
+        "correct_answer": "Double dispatch",
+        "answer_letter": "C"
+      }
+    ]
+  },
+  "System Design": {
+    "Easy": [
+      {
+        "question_num": 1,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "What does LLD stand for in software design?",
+        "options": [
+          "Linear Logic Design",
+          "Logical Layer Design",
+          "Long-Level Design",
+          "Low-Level Design"
+        ],
+        "correct_answer": "Low-Level Design",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 2,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "What does HLD stand for in software design?",
+        "options": [
+          "High-Level Design",
+          "Hardware Level Design",
+          "Hybrid Level Design",
+          "Heavy Load Design"
+        ],
+        "correct_answer": "High-Level Design",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 3,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "Which of the following is a relational database?",
+        "options": [
+          "Cassandra",
+          "MongoDB",
+          "Redis",
+          "MySQL"
+        ],
+        "correct_answer": "MySQL",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 4,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "What is a server in a client-server architecture?",
+        "options": [
+          "A machine or program that receives client requests and sends back responses",
+          "A device used only for storing backups",
+          "A cable that connects two computers",
+          "A program that displays web pages to the user"
+        ],
+        "correct_answer": "A machine or program that receives client requests and sends back responses",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 5,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "What does API stand for?",
+        "options": [
+          "Applied Program Integration",
+          "Application Process Instruction",
+          "Automated Process Interface",
+          "Application Programming Interface"
+        ],
+        "correct_answer": "Application Programming Interface",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 6,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "Which of the following is a NoSQL database?",
+        "options": [
+          "MySQL",
+          "MongoDB",
+          "PostgreSQL",
+          "Oracle"
+        ],
+        "correct_answer": "MongoDB",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 7,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "What does a load balancer do?",
+        "options": [
+          "Distributes incoming traffic across multiple servers",
+          "Stores data permanently",
+          "Compiles source code",
+          "Encrypts all database records"
+        ],
+        "correct_answer": "Distributes incoming traffic across multiple servers",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 8,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "What is caching?",
+        "options": [
+          "Compressing all files on a server",
+          "Copying data to tape backups",
+          "Deleting old data from a database",
+          "Storing frequently accessed data in a faster storage layer"
+        ],
+        "correct_answer": "Storing frequently accessed data in a faster storage layer",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 9,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "Which design pattern ensures a class has only one instance?",
+        "options": [
+          "Singleton",
+          "Decorator",
+          "Factory",
+          "Observer"
+        ],
+        "correct_answer": "Singleton",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 10,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "Which data format is most commonly used in REST APIs?",
+        "options": [
+          "BMP",
+          "MP3",
+          "EXE",
+          "JSON"
+        ],
+        "correct_answer": "JSON",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 11,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "Which HTTP method is normally used to retrieve data?",
+        "options": [
+          "DELETE",
+          "GET",
+          "PUT",
+          "POST"
+        ],
+        "correct_answer": "GET",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 12,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "What does a primary key do in a database table?",
+        "options": [
+          "Uniquely identifies each row",
+          "Links the table to a file",
+          "Sorts the table alphabetically",
+          "Encrypts the table"
+        ],
+        "correct_answer": "Uniquely identifies each row",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 13,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "What is horizontal scaling?",
+        "options": [
+          "Adding more CPU and RAM to one machine",
+          "Adding more machines to handle load",
+          "Reducing the number of servers",
+          "Moving a server to another country"
+        ],
+        "correct_answer": "Adding more machines to handle load",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 14,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "Which design pattern creates objects without exposing the creation logic\nto the client?",
+        "options": [
+          "Factory",
+          "Adapter",
+          "Observer",
+          "Iterator"
+        ],
+        "correct_answer": "Factory",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 15,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "What does an SQL JOIN do?",
+        "options": [
+          "Deletes duplicate rows",
+          "Creates a new database",
+          "Encrypts two tables together",
+          "Combines rows from two or more tables using a related column"
+        ],
+        "correct_answer": "Combines rows from two or more tables using a related column",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 16,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "What is a database index used for?",
+        "options": [
+          "Backing up the table",
+          "Limiting the number of rows",
+          "Encrypting the column",
+          "Speeding up data lookups"
+        ],
+        "correct_answer": "Speeding up data lookups",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 17,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "What does the Observer pattern do?",
+        "options": [
+          "Notifies dependent objects automatically when an object's state changes",
+          "Adds new behaviour to objects by wrapping them",
+          "Creates objects without specifying their class",
+          "Ensures only one object exists"
+        ],
+        "correct_answer": "Notifies dependent objects automatically when an object's state changes",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 18,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "What is a CDN?",
+        "options": [
+          "A network of distributed servers that delivers content from locations close to users",
+          "A type of message queue",
+          "A tool for compiling code",
+          "A database that stores user passwords"
+        ],
+        "correct_answer": "A network of distributed servers that delivers content from locations close to users",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 19,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "Which type of database is usually preferred when strict schemas and\nmulti-row transactions are needed?",
+        "options": [
+          "In-memory cache",
+          "Relational (SQL) database",
+          "Graph database only",
+          "Key-value store"
+        ],
+        "correct_answer": "Relational (SQL) database",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 20,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "What does it mean for a server to be stateless?",
+        "options": [
+          "It stores no data at all",
+          "It can handle only one request",
+          "It does not store client session data between requests",
+          "It has no operating system"
+        ],
+        "correct_answer": "It does not store client session data between requests",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 21,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "What is a message queue mainly used for?",
+        "options": [
+          "Rendering web pages",
+          "Compressing images",
+          "Storing user passwords",
+          "Asynchronous communication between services"
+        ],
+        "correct_answer": "Asynchronous communication between services",
+        "answer_letter": "D"
+      }
+    ],
+    "Medium": [
+      {
+        "question_num": 22,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "What is the Strategy pattern?",
+        "options": [
+          "It builds objects step by step",
+          "It ensures only one instance of a class exists",
+          "It lets you swap interchangeable algorithms at run time by encapsulating each one in a class",
+          "It converts one interface into another"
+        ],
+        "correct_answer": "It lets you swap interchangeable algorithms at run time by encapsulating each one in a class",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 23,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "What does ACID stand for in databases?",
+        "options": [
+          "Atomicity, Concurrency, Isolation, Distribution",
+          "Accuracy, Consistency, Integrity, Durability",
+          "Atomicity, Consistency, Isolation, Durability",
+          "Availability, Consistency, Isolation, Durability"
+        ],
+        "correct_answer": "Atomicity, Consistency, Isolation, Durability",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 24,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "What does CAP stand for in the CAP theorem?",
+        "options": [
+          "Consistency, Atomicity, Persistence",
+          "Consistency, Availability, Partition tolerance",
+          "Concurrency, Availability, Partitioning",
+          "Caching, Availability, Performance"
+        ],
+        "correct_answer": "Consistency, Availability, Partition tolerance",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 25,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "Which combination of data structures gives an O(1) LRU cache?",
+        "options": [
+          "A heap and a hash set",
+          "An array and a stack",
+          "A binary search tree and a queue",
+          "A hash map and a doubly linked list"
+        ],
+        "correct_answer": "A hash map and a doubly linked list",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 26,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "What is database sharding?",
+        "options": [
+          "Compressing tables to save space",
+          "Copying the same data to multiple servers",
+          "Encrypting data with several keys",
+          "Splitting data across multiple databases using a shard key"
+        ],
+        "correct_answer": "Splitting data across multiple databases using a shard key",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 27,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "What is a reverse proxy?",
+        "options": [
+          "A server that sits in front of backend servers and forwards client requests to them",
+          "A database replica",
+          "A server that hides the client's identity when browsing",
+          "A tool that reverses the order of packets"
+        ],
+        "correct_answer": "A server that sits in front of backend servers and forwards client requests to them",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 28,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "What does the Decorator pattern do?",
+        "options": [
+          "Creates a family of related objects",
+          "Defines a one-to-many dependency",
+          "Adds behaviour to an object dynamically by wrapping it",
+          "Provides a single global access point"
+        ],
+        "correct_answer": "Adds behaviour to an object dynamically by wrapping it",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 29,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "What is the difference between replication and sharding?",
+        "options": [
+          "Replication splits data; sharding copies the same data",
+          "Replication copies the same data to several nodes; sharding splits data across nodes",
+          "Replication is used only for caches",
+          "Both split data in exactly the same way"
+        ],
+        "correct_answer": "Replication copies the same data to several nodes; sharding splits data across nodes",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 30,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "Which cache write strategy writes to the cache and the database at the\nsame time?",
+        "options": [
+          "Write-around",
+          "Write-back",
+          "Write-through",
+          "Read-through"
+        ],
+        "correct_answer": "Write-through",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 31,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "Which rate-limiting algorithm allows short bursts of traffic up to a bucket\nsize?",
+        "options": [
+          "Round robin",
+          "Leaky bucket",
+          "Token bucket",
+          "Fixed window counter"
+        ],
+        "correct_answer": "Token bucket",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 32,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "What does the Adapter pattern do?",
+        "options": [
+          "Ensures a class has one instance",
+          "Notifies observers of changes",
+          "Creates objects without exposing creation logic",
+          "Converts one interface into another that the client expects"
+        ],
+        "correct_answer": "Converts one interface into another that the client expects",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 33,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "What is eventual consistency?",
+        "options": [
+          "Writes are rejected until all nodes agree",
+          "Replicas may differ temporarily but converge if no new updates arrive",
+          "Data is never replicated",
+          "All replicas are always identical"
+        ],
+        "correct_answer": "Replicas may differ temporarily but converge if no new updates arrive",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 34,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "What is the main purpose of consistent hashing?",
+        "options": [
+          "To encrypt keys before storing them",
+          "To sort keys alphabetically",
+          "To minimize data movement when nodes are added to or removed from a cluster",
+          "To make all hash values unique"
+        ],
+        "correct_answer": "To minimize data movement when nodes are added to or removed from a cluster",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 35,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "How does the cache-aside pattern work?",
+        "options": [
+          "The database pushes every update to the cache",
+          "The application checks the cache first, and on a miss reads from the database and fills the cache",
+          "The cache itself loads data from the database on a miss",
+          "Every write goes only to the cache"
+        ],
+        "correct_answer": "The application checks the cache first, and on a miss reads from the database and fills the cache",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 36,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "What is the Builder pattern used for?",
+        "options": [
+          "Sharing state between many small objects",
+          "Constructing complex objects step by step",
+          "Providing access to a remote object",
+          "Adding responsibilities to objects dynamically"
+        ],
+        "correct_answer": "Constructing complex objects step by step",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 37,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "What is the N+1 query problem?",
+        "options": [
+          "Querying a table with N+1 columns",
+          "Having N+1 replicas of a database",
+          "Running one query to fetch a list and then one extra query for each item in it",
+          "Running N queries in parallel"
+        ],
+        "correct_answer": "Running one query to fetch a list and then one extra query for each item in it",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 38,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "What does it mean for an API operation to be idempotent?",
+        "options": [
+          "The operation never modifies data",
+          "Repeating the same request has the same effect as sending it once",
+          "The operation always returns the same response time",
+          "The operation can be called only once"
+        ],
+        "correct_answer": "Repeating the same request has the same effect as sending it once",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 39,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "What is a dead letter queue?",
+        "options": [
+          "A queue that holds messages that could not be processed successfully",
+          "A queue that deletes all messages immediately",
+          "A queue used only for emails",
+          "A queue for messages older than a year"
+        ],
+        "correct_answer": "A queue that holds messages that could not be processed successfully",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 40,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "Which design pattern is typically used to implement undo and redo\noperations?",
+        "options": [
+          "Flyweight",
+          "Command",
+          "Prototype",
+          "Singleton"
+        ],
+        "correct_answer": "Command",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 41,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "What is the difference between optimistic and pessimistic locking?",
+        "options": [
+          "Optimistic locking checks for conflicts (e.g., a version number) at update time; pessimistic locking\nlocks the data up front",
+          "Optimistic locking is used only in NoSQL databases",
+          "Optimistic locking locks rows first; pessimistic locking never locks",
+          "They are the same technique"
+        ],
+        "correct_answer": "Optimistic locking checks for conflicts (e.g., a version number) at update time; pessimistic locking\nlocks the data up front",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 42,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "What is the purpose of a circuit breaker in a microservice architecture?",
+        "options": [
+          "To automatically scale servers",
+          "To balance load between replicas",
+          "To stop calling a failing service for a while and avoid cascading failures",
+          "To encrypt traffic between services"
+        ],
+        "correct_answer": "To stop calling a failing service for a while and avoid cascading failures",
+        "answer_letter": "C"
+      }
+    ],
+    "Hard": [
+      {
+        "question_num": 43,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "What does CQRS stand for and what does it do?",
+        "options": [
+          "Concurrent Query Request Scheduling: schedules queries in parallel",
+          "Cache Query Response Storage: caches query results",
+          "Central Queue Retry System: retries failed messages",
+          "Command Query Responsibility Segregation: separates the models for reads and writes"
+        ],
+        "correct_answer": "Command Query Responsibility Segregation: separates the models for reads and writes",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 44,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "What is a Bloom filter?",
+        "options": [
+          "A structure that may give false negatives but never false positives",
+          "A sorted tree that stores unique keys",
+          "A probabilistic structure that may give false positives but never false negatives for membership",
+          "A cache that removes the oldest items first"
+        ],
+        "correct_answer": "A probabilistic structure that may give false positives but never false negatives for membership",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 45,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "How does the Saga pattern differ from two-phase commit (2PC)?",
+        "options": [
+          "A saga uses a sequence of local transactions with compensating actions instead of a blocking\nglobal commit",
+          "A saga locks all databases until everything commits",
+          "A saga works only with a single database",
+          "A saga guarantees isolation across services"
+        ],
+        "correct_answer": "A saga uses a sequence of local transactions with compensating actions instead of a blocking\nglobal commit",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 46,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "In a 5-node Raft cluster, how many node failures can the cluster tolerate\nwhile still making progress?",
+        "options": [
+          "3",
+          "4",
+          "2",
+          "1"
+        ],
+        "correct_answer": "2",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 47,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "What is a cache stampede (thundering herd on a cache)?",
+        "options": [
+          "The cache running out of memory",
+          "A cache returning stale data for a year",
+          "Two caches holding different values",
+          "Many requests miss the cache at once for an expired hot key and all hit the database"
+        ],
+        "correct_answer": "Many requests miss the cache at once for an expired hot key and all hit the database",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 48,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "What is the main risk of a write-behind (write-back) cache?",
+        "options": [
+          "Reads are always slower",
+          "Data may be lost if the cache fails before it is written to the database",
+          "The cache can never be updated",
+          "The database is written twice"
+        ],
+        "correct_answer": "Data may be lost if the cache fails before it is written to the database",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 49,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "In Dynamo-style quorum systems with N replicas, read quorum R and\nwrite quorum W, which condition gives strong consistency?",
+        "options": [
+          "W + R = 1",
+          "W + R < N",
+          "W + R > N",
+          "W = R = 1"
+        ],
+        "correct_answer": "W + R > N",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 50,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "What are vector clocks used for in distributed systems?",
+        "options": [
+          "Encrypting timestamps",
+          "Synchronizing server clocks exactly",
+          "Detecting causality and conflicting concurrent updates",
+          "Measuring network latency"
+        ],
+        "correct_answer": "Detecting causality and conflicting concurrent updates",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 51,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "Which anomaly can still occur under the READ COMMITTED isolation\nlevel?",
+        "options": [
+          "Dirty read",
+          "Non-repeatable read",
+          "Reading uncommitted data",
+          "Lost power"
+        ],
+        "correct_answer": "Non-repeatable read",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 52,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "What is a hot partition (hot key) problem?",
+        "options": [
+          "One shard or key receives a disproportionately large share of the traffic",
+          "A database that has too many indexes",
+          "A server overheating",
+          "A partition that has no data"
+        ],
+        "correct_answer": "One shard or key receives a disproportionately large share of the traffic",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 53,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "In a news feed design, why is fan-out-on-write a problem for users with\nmillions of followers?",
+        "options": [
+          "Followers cannot read the post",
+          "The post cannot be deleted",
+          "One post must be written into millions of follower feeds, which is very expensive",
+          "The post cannot be cached"
+        ],
+        "correct_answer": "One post must be written into millions of follower feeds, which is very expensive",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 54,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "Which approach generates roughly time-sortable unique IDs across\ndistributed servers without central coordination?",
+        "options": [
+          "Random 4-digit numbers",
+          "Auto-increment column in one database",
+          "Hashing the user's name",
+          "Snowflake-style IDs (timestamp + machine ID + sequence)"
+        ],
+        "correct_answer": "Snowflake-style IDs (timestamp + machine ID + sequence)",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 55,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "What are LSM trees (used in Cassandra and RocksDB) optimized for?",
+        "options": [
+          "Reducing the number of disk reads for every query",
+          "High write throughput through sequential writes and background compaction",
+          "Storing data only in memory",
+          "Fast in-place updates of single rows"
+        ],
+        "correct_answer": "High write throughput through sequential writes and background compaction",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 56,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "What does the PACELC theorem add to the CAP theorem?",
+        "options": [
+          "It replaces availability with durability",
+          "Even without a partition, there is a trade-off between latency and consistency",
+          "It states partitions never happen",
+          "It adds a fourth guarantee called ordering"
+        ],
+        "correct_answer": "Even without a partition, there is a trade-off between latency and consistency",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 57,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "What is hinted handoff in Dynamo-style databases?",
+        "options": [
+          "A node temporarily stores writes meant for an unavailable replica and delivers them when it returns",
+          "Sending hints to clients about slow nodes",
+          "Moving a shard to a new cluster",
+          "Handing the leader role to another node"
+        ],
+        "correct_answer": "A node temporarily stores writes meant for an unavailable replica and delivers them when it returns",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 58,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "What are Merkle trees used for in distributed databases?",
+        "options": [
+          "Balancing load between clients",
+          "Encrypting replicated data",
+          "Sorting keys across shards",
+          "Efficiently detecting differences between replicas to repair them (anti-entropy)"
+        ],
+        "correct_answer": "Efficiently detecting differences between replicas to repair them (anti-entropy)",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 59,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "What is the dual-write problem and a common fix?",
+        "options": [
+          "Two replicas writing at once; fixed by deleting one",
+          "Writing twice to the same table; fixed with an index",
+          "Writing to a database and a message broker separately can leave them inconsistent; the\ntransactional outbox pattern fixes it",
+          "Two users writing at once; fixed with caching"
+        ],
+        "correct_answer": "Writing to a database and a message broker separately can leave them inconsistent; the\ntransactional outbox pattern fixes it",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 60,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "What is HyperLogLog used for?",
+        "options": [
+          "Estimating the number of distinct elements using very little memory",
+          "Sorting very large files",
+          "Detecting deadlocks",
+          "Compressing logs"
+        ],
+        "correct_answer": "Estimating the number of distinct elements using very little memory",
+        "answer_letter": "A"
+      }
+    ]
+  },
+  "Aptitude": {
+    "Easy": [
+      {
+        "question_num": 1,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "What is 15% of 200?",
+        "options": [
+          "35",
+          "30",
+          "25",
+          "20"
+        ],
+        "correct_answer": "30",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 2,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "What is the next number in the series 2, 4, 6, 8, ?",
+        "options": [
+          "10",
+          "9",
+          "11",
+          "12"
+        ],
+        "correct_answer": "10",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 3,
+        "difficulty_score": 0.5,
+        "difficulty": "Easy",
+        "question": "If one pen costs Rs. 5, what is the cost of 12 pens?",
+        "options": [
+          "Rs. 50",
+          "Rs. 60",
+          "Rs. 65",
+          "Rs. 55"
+        ],
+        "correct_answer": "Rs. 60",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 4,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "What is the average of 10, 20 and 30?",
+        "options": [
+          "15",
+          "20",
+          "30",
+          "25"
+        ],
+        "correct_answer": "20",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 5,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "Which of the following is NOT a prime number?",
+        "options": [
+          "13",
+          "21",
+          "11",
+          "17"
+        ],
+        "correct_answer": "21",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 6,
+        "difficulty_score": 1.0,
+        "difficulty": "Easy",
+        "question": "What is 0.25 expressed as a fraction?",
+        "options": [
+          "1/5",
+          "1/2",
+          "2/5",
+          "1/4"
+        ],
+        "correct_answer": "1/4",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 7,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "What is the simple interest on Rs. 1000 at 5% per annum for 2 years?",
+        "options": [
+          "Rs. 105",
+          "Rs. 100",
+          "Rs. 150",
+          "Rs. 50"
+        ],
+        "correct_answer": "Rs. 100",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 8,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "What is the next number in the series 1, 4, 9, 16, ?",
+        "options": [
+          "25",
+          "24",
+          "20",
+          "36"
+        ],
+        "correct_answer": "25",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 9,
+        "difficulty_score": 1.5,
+        "difficulty": "Easy",
+        "question": "What is the LCM of 4 and 6?",
+        "options": [
+          "8",
+          "10",
+          "12",
+          "24"
+        ],
+        "correct_answer": "12",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 10,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "A car travels at 60 km/h for 3 hours. What distance does it cover?",
+        "options": [
+          "180 km",
+          "210 km",
+          "120 km",
+          "150 km"
+        ],
+        "correct_answer": "180 km",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 11,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "Two numbers are in the ratio 3:5 and their sum is 40. What is the larger\nnumber?",
+        "options": [
+          "30",
+          "15",
+          "25",
+          "20"
+        ],
+        "correct_answer": "25",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 12,
+        "difficulty_score": 2.0,
+        "difficulty": "Easy",
+        "question": "An article bought for Rs. 400 is sold at a 20% profit. What is the selling\nprice?",
+        "options": [
+          "Rs. 500",
+          "Rs. 460",
+          "Rs. 420",
+          "Rs. 480"
+        ],
+        "correct_answer": "Rs. 480",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 13,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "What is the next number in the series 1, 1, 2, 3, 5, 8, ?",
+        "options": [
+          "11",
+          "12",
+          "13",
+          "15"
+        ],
+        "correct_answer": "13",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 14,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "After a 10% discount, an item is sold for Rs. 900. What was its marked\nprice?",
+        "options": [
+          "Rs. 910",
+          "Rs. 990",
+          "Rs. 1010",
+          "Rs. 1000"
+        ],
+        "correct_answer": "Rs. 1000",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 15,
+        "difficulty_score": 2.5,
+        "difficulty": "Easy",
+        "question": "If x + 5 = 2x - 3, what is the value of x?",
+        "options": [
+          "8",
+          "2",
+          "5",
+          "10"
+        ],
+        "correct_answer": "8",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 16,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "What is the sum 1 + 2 + 3 + ... + 100?",
+        "options": [
+          "5050",
+          "5000",
+          "5005",
+          "5100"
+        ],
+        "correct_answer": "5050",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 17,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "A can finish a job in 10 days and B can finish it in 15 days. Working\ntogether, how many days will they take?",
+        "options": [
+          "5 days",
+          "6 days",
+          "8 days",
+          "12 days"
+        ],
+        "correct_answer": "6 days",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 18,
+        "difficulty_score": 3.0,
+        "difficulty": "Easy",
+        "question": "The HCF of two numbers is 12 and their LCM is 72. If one number is 24,\nwhat is the other?",
+        "options": [
+          "36",
+          "18",
+          "48",
+          "30"
+        ],
+        "correct_answer": "36",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 19,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "A 150 m long train crosses a pole in 15 seconds. What is its speed?",
+        "options": [
+          "54 km/h",
+          "36 km/h",
+          "40 km/h",
+          "30 km/h"
+        ],
+        "correct_answer": "36 km/h",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 20,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "Two fair coins are tossed. What is the probability that both show heads?",
+        "options": [
+          "3/4",
+          "1/4",
+          "1/2",
+          "1/3"
+        ],
+        "correct_answer": "1/4",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 21,
+        "difficulty_score": 3.5,
+        "difficulty": "Easy",
+        "question": "Which sum is the most likely when two fair dice are rolled?",
+        "options": [
+          "8",
+          "12",
+          "7",
+          "6"
+        ],
+        "correct_answer": "7",
+        "answer_letter": "C"
+      }
+    ],
+    "Medium": [
+      {
+        "question_num": 22,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "What is the compound interest on Rs. 10,000 at 10% per annum for 2 years\n(compounded annually)?",
+        "options": [
+          "Rs. 1,100",
+          "Rs. 2,000",
+          "Rs. 2,100",
+          "Rs. 2,200"
+        ],
+        "correct_answer": "Rs. 2,100",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 23,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "A 20-litre mixture of milk and water is in the ratio 3:1. How many litres of\nwater must be added to make the ratio 1:1?",
+        "options": [
+          "10 litres",
+          "5 litres",
+          "15 litres",
+          "20 litres"
+        ],
+        "correct_answer": "10 litres",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 24,
+        "difficulty_score": 4.0,
+        "difficulty": "Medium",
+        "question": "Statements: All A are B. All B are C. Which conclusion definitely follows?",
+        "options": [
+          "All A are C",
+          "No A is C",
+          "All C are A",
+          "Some C are not B"
+        ],
+        "correct_answer": "All A are C",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 25,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "Today is Monday. What day of the week will it be 100 days from now?",
+        "options": [
+          "Tuesday",
+          "Friday",
+          "Thursday",
+          "Wednesday"
+        ],
+        "correct_answer": "Wednesday",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 26,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "A boat's speed in still water is 10 km/h and the stream flows at 2 km/h.\nHow long does it take to go 24 km downstream?",
+        "options": [
+          "1.5 hours",
+          "3 hours",
+          "2 hours",
+          "2.5 hours"
+        ],
+        "correct_answer": "2 hours",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 27,
+        "difficulty_score": 4.5,
+        "difficulty": "Medium",
+        "question": "How many distinct arrangements can be made from the letters of the word\nLEVEL?",
+        "options": [
+          "120",
+          "30",
+          "24",
+          "60"
+        ],
+        "correct_answer": "30",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 28,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "What is the sum of the first 25 odd numbers?",
+        "options": [
+          "525",
+          "650",
+          "600",
+          "625"
+        ],
+        "correct_answer": "625",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 29,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "Pipe A fills a tank in 12 hours, pipe B fills it in 18 hours, and pipe C empties\nit in 36 hours. If all three are open, how long to fill the empty tank?",
+        "options": [
+          "12 hours",
+          "8 hours",
+          "10 hours",
+          "9 hours"
+        ],
+        "correct_answer": "9 hours",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 30,
+        "difficulty_score": 5.0,
+        "difficulty": "Medium",
+        "question": "A bag has 5 red and 3 blue balls. Two balls are drawn without replacement.\nWhat is the probability that both are red?",
+        "options": [
+          "5/14",
+          "1/4",
+          "25/64",
+          "5/8"
+        ],
+        "correct_answer": "5/14",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 31,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "A man walking at 5 km/h reaches his destination 10 minutes late. At 6\nkm/h he reaches 10 minutes early. What is the distance?",
+        "options": [
+          "10 km",
+          "15 km",
+          "8 km",
+          "12 km"
+        ],
+        "correct_answer": "10 km",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 32,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "In how many ways can 5 people be seated around a circular table?",
+        "options": [
+          "12",
+          "24",
+          "120",
+          "60"
+        ],
+        "correct_answer": "24",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 33,
+        "difficulty_score": 5.5,
+        "difficulty": "Medium",
+        "question": "Which of the following numbers is divisible by 11?",
+        "options": [
+          "2735",
+          "2731",
+          "2728",
+          "2729"
+        ],
+        "correct_answer": "2728",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 34,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "Two successive discounts of 20% and 10% are equivalent to a single\ndiscount of:",
+        "options": [
+          "25%",
+          "28%",
+          "30%",
+          "27%"
+        ],
+        "correct_answer": "28%",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 35,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "A's salary is 25% more than B's. By what percentage is B's salary less than\nA's?",
+        "options": [
+          "15%",
+          "30%",
+          "25%",
+          "20%"
+        ],
+        "correct_answer": "20%",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 36,
+        "difficulty_score": 6.0,
+        "difficulty": "Medium",
+        "question": "A drawer has plenty of socks in 4 different colours. What is the minimum\nnumber of socks you must pull out in the dark to guarantee a matching pair?",
+        "options": [
+          "4",
+          "3",
+          "8",
+          "5"
+        ],
+        "correct_answer": "5",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 37,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "How many trailing zeros are there in 50! (50 factorial)?",
+        "options": [
+          "13",
+          "11",
+          "12",
+          "10"
+        ],
+        "correct_answer": "12",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 38,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "A fair coin is tossed repeatedly. What is the expected number of tosses\nuntil the first head?",
+        "options": [
+          "3",
+          "4",
+          "2",
+          "1"
+        ],
+        "correct_answer": "2",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 39,
+        "difficulty_score": 6.5,
+        "difficulty": "Medium",
+        "question": "Two trains of lengths 120 m and 180 m run in opposite directions at 54\nkm/h and 36 km/h. How long do they take to cross each other?",
+        "options": [
+          "18 seconds",
+          "15 seconds",
+          "10 seconds",
+          "12 seconds"
+        ],
+        "correct_answer": "12 seconds",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 40,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "A person travels from A to B at 40 km/h and returns at 60 km/h. What is the\naverage speed for the whole journey?",
+        "options": [
+          "50 km/h",
+          "48 km/h",
+          "45 km/h",
+          "52 km/h"
+        ],
+        "correct_answer": "48 km/h",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 41,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "What is the last digit of 3^2026?",
+        "options": [
+          "3",
+          "1",
+          "7",
+          "9"
+        ],
+        "correct_answer": "9",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 42,
+        "difficulty_score": 7.0,
+        "difficulty": "Medium",
+        "question": "A cube painted red on all faces is cut into 64 identical small cubes. How\nmany small cubes have exactly two faces painted?",
+        "options": [
+          "24",
+          "12",
+          "36",
+          "8"
+        ],
+        "correct_answer": "24",
+        "answer_letter": "A"
+      }
+    ],
+    "Hard": [
+      {
+        "question_num": 43,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "How many positive divisors does 360 have?",
+        "options": [
+          "20",
+          "18",
+          "30",
+          "24"
+        ],
+        "correct_answer": "24",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 44,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "What is the remainder when 2^100 is divided by 7?",
+        "options": [
+          "2",
+          "1",
+          "3",
+          "4"
+        ],
+        "correct_answer": "2",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 45,
+        "difficulty_score": 7.5,
+        "difficulty": "Hard",
+        "question": "What is the value of 1/(1x2) + 1/(2x3) + 1/(3x4) + ... + 1/(99x100)?",
+        "options": [
+          "1",
+          "99/100",
+          "98/99",
+          "100/101"
+        ],
+        "correct_answer": "99/100",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 46,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "How many squares of all sizes are there on an 8 x 8 chessboard?",
+        "options": [
+          "128",
+          "256",
+          "64",
+          "204"
+        ],
+        "correct_answer": "204",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 47,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "In the Monty Hall problem (3 doors, one car), you pick a door and the host\nopens another door with a goat. What is the probability of winning the car if you switch?",
+        "options": [
+          "1/2",
+          "3/4",
+          "2/3",
+          "1/3"
+        ],
+        "correct_answer": "2/3",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 48,
+        "difficulty_score": 8.0,
+        "difficulty": "Hard",
+        "question": "You have 8 identical-looking balls, one of which is slightly heavier. What is\nthe minimum number of weighings on a balance scale that guarantees finding it?",
+        "options": [
+          "3",
+          "1",
+          "2",
+          "4"
+        ],
+        "correct_answer": "2",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 49,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "How many times do the hour and minute hands of a clock overlap in a\n24-hour day?",
+        "options": [
+          "22",
+          "23",
+          "21",
+          "24"
+        ],
+        "correct_answer": "22",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 50,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "How many rectangles of all sizes are there on an 8 x 8 chessboard?",
+        "options": [
+          "204",
+          "1024",
+          "1296",
+          "1156"
+        ],
+        "correct_answer": "1296",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 51,
+        "difficulty_score": 8.5,
+        "difficulty": "Hard",
+        "question": "100 doors are closed. Person k toggles every k-th door, for k = 1 to 100.\nHow many doors are open at the end?",
+        "options": [
+          "9",
+          "50",
+          "100",
+          "10"
+        ],
+        "correct_answer": "10",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 52,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "What is the minimum number of people needed in a room so that the\nprobability of two sharing a birthday exceeds 50%?",
+        "options": [
+          "183",
+          "100",
+          "50",
+          "23"
+        ],
+        "correct_answer": "23",
+        "answer_letter": "D"
+      },
+      {
+        "question_num": 53,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "Four people take 1, 2, 5 and 10 minutes to cross a bridge. At most two cross\nat a time, with one torch that must be carried back and forth. What is the minimum total time\nfor all to cross?",
+        "options": [
+          "19 minutes",
+          "16 minutes",
+          "17 minutes",
+          "21 minutes"
+        ],
+        "correct_answer": "17 minutes",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 54,
+        "difficulty_score": 9.0,
+        "difficulty": "Hard",
+        "question": "Two ropes each burn for exactly 60 minutes, but unevenly. Which\nprocedure measures exactly 45 minutes?",
+        "options": [
+          "Cut rope A in half and burn it from one end",
+          "Light both ropes at both ends",
+          "Light rope A at both ends and rope B at one end; when A burns out, light the other end of B",
+          "Light both ropes at one end and wait for the first to burn out"
+        ],
+        "correct_answer": "Light rope A at both ends and rope B at one end; when A burns out, light the other end of B",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 55,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "A family has two children and at least one is a boy. What is the probability\nthat both are boys?",
+        "options": [
+          "1/2",
+          "1/4",
+          "1/3",
+          "2/3"
+        ],
+        "correct_answer": "1/3",
+        "answer_letter": "C"
+      },
+      {
+        "question_num": 56,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "With 2 identical eggs and a 100-storey building, what is the minimum\nnumber of drops that guarantees finding the highest safe floor in the worst case?",
+        "options": [
+          "50",
+          "14",
+          "10",
+          "20"
+        ],
+        "correct_answer": "14",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 57,
+        "difficulty_score": 9.5,
+        "difficulty": "Hard",
+        "question": "There are 12 identical-looking balls, one of which is heavier or lighter\n(unknown which). What is the minimum number of balance weighings needed to find the odd\nball and tell whether it is heavier or lighter?",
+        "options": [
+          "4",
+          "3",
+          "2",
+          "6"
+        ],
+        "correct_answer": "3",
+        "answer_letter": "B"
+      },
+      {
+        "question_num": 58,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "In how many ways can a 2 x 8 board be completely tiled with 2 x 1\ndominoes?",
+        "options": [
+          "34",
+          "55",
+          "21",
+          "28"
+        ],
+        "correct_answer": "34",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 59,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "A random permutation of 1, 2, 3, 4, 5 is chosen. What is the probability that\nno number stays in its original position?",
+        "options": [
+          "11/30",
+          "2/5",
+          "3/8",
+          "1/3"
+        ],
+        "correct_answer": "11/30",
+        "answer_letter": "A"
+      },
+      {
+        "question_num": 60,
+        "difficulty_score": 10.0,
+        "difficulty": "Hard",
+        "question": "In how many ways can 8 identical balls be distributed among 3 distinct\nboxes so that each box gets at least one ball?",
+        "options": [
+          "45",
+          "56",
+          "28",
+          "21"
+        ],
+        "correct_answer": "21",
+        "answer_letter": "D"
+      }
+    ]
+  }
+}

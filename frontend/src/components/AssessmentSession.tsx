@@ -107,6 +107,7 @@ export default function AssessmentSession({
           const initialDiff = data.blueprint?.initial_difficulty || 'Medium';
           setCurrentDifficulty(initialDiff);
           loadNextMCQ(assessList[0], initialDiff, 0, true, data.session_id);
+          fetchCodingQuestion(data.session_id);
         } else {
           throw new Error('Unable to start assessment session');
         }
@@ -114,8 +115,6 @@ export default function AssessmentSession({
         setError(e instanceof Error ? e.message : 'Backend unavailable');
         setLoadingQuestion(false);
       }
-
-      fetchCodingQuestion();
     };
 
     initSession();
@@ -170,10 +169,12 @@ export default function AssessmentSession({
   };
 
   // Fetch Coding Question
-  const fetchCodingQuestion = async () => {
+  const fetchCodingQuestion = async (sid?: string) => {
     try {
       const companyParam = encodeURIComponent(targetCompany || 'General');
-      const res = await fetch(`http://127.0.0.1:8000/api/assessment/coding-question/${companyParam}`);
+      const activeSid = sid || sessionId;
+      const queryParam = activeSid ? `?session_id=${encodeURIComponent(activeSid)}` : '';
+      const res = await fetch(`http://127.0.0.1:8000/api/assessment/coding-question/${companyParam}${queryParam}`);
       if (res.ok) {
         const data = await res.json();
         if (!res.ok) throw new Error('Coding question unavailable');

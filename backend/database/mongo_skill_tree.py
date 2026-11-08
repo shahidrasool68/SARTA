@@ -61,6 +61,7 @@ SKILL_PREREQUISITES = {
     "MongoDB": ["Data Structures"],
     "Redis": ["SQL", "Data Structures"],
     "PostgreSQL": ["SQL"],
+    "Aptitude": [],
 
     # DevOps / Cloud
     "Docker": ["Linux"],
@@ -198,8 +199,25 @@ def seed_skill_tree():
     skill_tree_col = db["skill_tree"]
     questions_col = db["questions"]
 
+    # ── Merge Curated PDF Question Bank (300 questions from 5 domain PDFs) ──
+    try:
+        try:
+            from database.pdf_extractor import load_cached_pdf_questions
+        except ImportError:
+            from pdf_extractor import load_cached_pdf_questions
+        pdf_questions = load_cached_pdf_questions()
+        for skill, levels in pdf_questions.items():
+            if skill not in QUESTION_BANK:
+                QUESTION_BANK[skill] = {"Easy": [], "Medium": [], "Hard": []}
+            for diff in ("Easy", "Medium", "Hard"):
+                if diff in levels:
+                    QUESTION_BANK[skill][diff] = levels[diff]
+    except Exception as e:
+        print(f"Notice: Could not load PDF questions for seeding: {e}")
+
     # ── Seed Questions ───────────────────────────────────────────────────
     print("Seeding questions into MongoDB...")
+    total_q_seeded = 0
     for skill, difficulties in QUESTION_BANK.items():
         for difficulty, questions in difficulties.items():
             for idx, q in enumerate(questions):
@@ -208,6 +226,7 @@ def seed_skill_tree():
                     "_id": q_id,
                     "skill": skill,
                     "difficulty": difficulty,
+                    "difficulty_score": q.get("difficulty_score", 5.0),
                     "question": q["question"],
                     "options": q["options"],
                     "correct_answer": q["correct_answer"],
@@ -215,6 +234,7 @@ def seed_skill_tree():
                 questions_col.update_one(
                     {"_id": q_id}, {"$set": doc}, upsert=True
                 )
+                total_q_seeded += 1
 
     # ── Seed Skill Tree Nodes ────────────────────────────────────────────
     print("Seeding skill tree nodes into MongoDB...")

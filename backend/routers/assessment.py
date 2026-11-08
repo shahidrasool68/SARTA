@@ -10,9 +10,11 @@ from services.adaptive_controller import select_next_question
 from services.performance_analytics import generate_performance_report
 from services.judge0_client import evaluate_code
 from services.assessment_store import load_session, save_session
-from services.coding_bank import get_public_problem, get_problem, CODING_PROBLEMS
+from services.coding_bank import get_public_problem, get_problem, select_problem_for_company, CODING_PROBLEMS
 from services.company_classifier import get_company_assessment_config, classify_company_tier, initial_difficulty_for_tier
 from services.company_problems import load_company_problems, get_top_problems, get_company_problem_stats, get_available_companies
+import json
+from pathlib import Path
 
 router = APIRouter(prefix="/api/assessment", tags=["Assessment"])
 
@@ -311,18 +313,32 @@ FALLBACK_QUESTIONS = {
     }
 }
 
+# ── Integrate Curated PDF Question Bank (OS, CN, OOP, System Design, Aptitude) ──
+_PDF_CACHE_FILE = Path(__file__).resolve().parent.parent / "database" / "parsed_pdf_questions.json"
+if _PDF_CACHE_FILE.exists():
+    try:
+        with open(_PDF_CACHE_FILE, "r", encoding="utf-8") as _f:
+            _pdf_bank = json.load(_f)
+            for _skill, _levels in _pdf_bank.items():
+                if _skill not in FALLBACK_QUESTIONS:
+                    FALLBACK_QUESTIONS[_skill] = {"Easy": [], "Medium": [], "Hard": []}
+                for _diff in ("Easy", "Medium", "Hard"):
+                    if _diff in _levels:
+                        # Add questions from the calibrated 60-question PDF bank
+                        FALLBACK_QUESTIONS[_skill][_diff].extend(_levels[_diff])
+    except Exception as _e:
+        print(f"Notice: Could not load PDF question cache: {_e}")
 
-# The local verified bank is the source of truth. External scraped questions are not
-# auto-graded unless separately curated, reviewed, and given a stable correct answer.
+
 DIFFICULTIES = ("Easy", "Medium", "Hard")
 SUPPORTED_SKILLS = tuple(FALLBACK_QUESTIONS)
 ROLE_SKILLS = {
     "web development": ("JavaScript", "React", "SQL", "OOP"),
     "frontend developer": ("JavaScript", "React", "OOP", "Data Structures"),
-    "backend developer": ("Python", "SQL", "OOP", "Data Structures"),
+    "backend developer": ("Python", "SQL", "OS", "System Design"),
     "data science": ("Python", "Machine Learning", "SQL", "Data Structures"),
     "data scientist": ("Python", "Machine Learning", "SQL", "Data Structures"),
-    "software engineer": ("Data Structures", "OOP", "Python", "SQL"),
+    "software engineer": ("Data Structures", "OOP", "OS", "Computer Networks"),
 }
 
 class StartSessionRequest(BaseModel):
@@ -416,9 +432,10 @@ def start_assessment_session(req: StartSessionRequest):
     if not skills:
         raise HTTPException(status_code=422, detail="No assessable skills selected")
 
-    # ── Company-tier-based initial difficulty ────────────────────────────
+    # ── Company-tier-based initial difficulty & coding challenge selection ─
     company_config = get_company_assessment_config(req.target_company or "")
     initial_diff = company_config["initial_difficulty"]  # Easy / Medium / Hard
+    assigned_problem_id = select_problem_for_company(req.target_company or "", company_config["tier"])
 
     sid = str(uuid.uuid4())
     session = {
@@ -427,14 +444,15 @@ def start_assessment_session(req: StartSessionRequest):
         "company_tier": company_config["tier"],
         "responses": [], "coding_results": [], "pending": None, "seen": [],
         "per_skill_state": {skill: {"difficulty": initial_diff, "streak": 0, "questions_answered": 0, "correct": 0} for skill in skills},
-        "coding_problem_id": "two_sum", "report": None, "completed": False,
+        "coding_problem_id": assigned_problem_id, "report": None, "completed": False,
     }
     save_session(session)
     return {"session_id": sid, "role": req.role, "skills_to_assess": skills,
             "target_company": req.target_company,
             "company_tier": company_config["tier"],
+            "coding_problem_id": assigned_problem_id,
             "questions_per_skill": 3, "total_mcqs": len(skills)*3,
-            "blueprint": {"role": req.role, "skills": skills, "initial_difficulty": initial_diff}}
+            "blueprint": {"role": req.role, "skills": skills, "initial_difficulty": initial_diff, "coding_challenge": assigned_problem_id}}
 
 
 @router.post("/next-mcq")
@@ -491,12 +509,22 @@ def submit_answer(req: SubmitAnswerRequest):
 
 
 @router.get("/coding-question/{company}")
-def coding_question(company: str):
+def coding_question(company: str, session_id: Optional[str] = None):
     # Public statement and SAMPLE tests only; private hidden inputs never leave backend.
-    problem = get_public_problem("two_sum")
+    prob_id = "two_sum"
+    if session_id:
+        try:
+            session = session_or_404(session_id)
+            prob_id = session.get("coding_problem_id", "two_sum")
+        except Exception:
+            prob_id = select_problem_for_company(company)
+    else:
+        prob_id = select_problem_for_company(company)
+
+    problem = get_public_problem(prob_id)
     # Attach company-specific LeetCode problem stats if available
     company_stats = get_company_problem_stats(company) if company and company != "General" else None
-    company_problems_list = get_top_problems(company, n=5) if company and company != "General" else []
+    company_problems_list = get_top_problems(company, n=10) if company and company != "General" else []
     return {
         **problem,
         "company": company if company and company != "General" else "General",
