@@ -1,9 +1,5 @@
 # SARTA — Semantic Adaptive Recruitment and Technical Assessment
 
-B.Tech Computer Engineering minor project — Jamia Millia Islamia, New Delhi  
-Syed Anas Ahmed (23BCS020), Md Shahid Rasool (23BCS021)  
-Supervisor: Dr. S M Faisal Malik
-
 SARTA implements resume parsing, semantic skill extraction, role matching, adaptive MCQ assessment, Judge0-based coding evaluation and explainable reports. The original Layer 1/2 code has been retained; Layer 3/4 code has been corrected and integrated.
 
 **[Read the full setup, implementation details, API guide, testing instructions and limitations](ASSESSMENT_IMPLEMENTATION.md).**
