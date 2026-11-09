@@ -27,6 +27,12 @@ JUDGE0_URL: str = os.getenv("JUDGE0_URL", "http://127.0.0.1:2358").rstrip("/")
 JUDGE0_API_KEY: str = os.getenv("JUDGE0_API_KEY", "").strip()
 JUDGE0_API_HOST: str = os.getenv("JUDGE0_API_HOST", "judge0-ce.p.rapidapi.com").strip()
 
+# ── LLM Question Generator (for dynamic JD topics) ─────────────────────
+GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "").strip()
+OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "").strip()
+GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "").strip()
+OPENAI_BASE_URL: str = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+
 # ── SQLite Session Store ───────────────────────────────────────────────
 SARTA_ASSESSMENT_DB: str = os.getenv(
     "SARTA_ASSESSMENT_DB",

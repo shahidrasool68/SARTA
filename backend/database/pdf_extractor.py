@@ -153,7 +153,7 @@ def sync_to_mongodb():
 
     questions_data = load_cached_pdf_questions()
     try:
-        client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=2000)
+        client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=8000, connectTimeoutMS=8000)
         db = client[MONGO_DB_NAME]
         col = db["questions"]
 

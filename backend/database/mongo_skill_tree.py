@@ -23,9 +23,13 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import MONGO_URI, MONGO_DB_NAME
 
 
+_mongo_client = None
+
 def get_db():
-    client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=2000, connectTimeoutMS=2000)
-    return client[MONGO_DB_NAME]
+    global _mongo_client
+    if _mongo_client is None:
+        _mongo_client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=8000, connectTimeoutMS=8000)
+    return _mongo_client[MONGO_DB_NAME]
 
 
 # ── Skill Prerequisite Graph ────────────────────────────────────────────
@@ -199,6 +203,21 @@ def seed_skill_tree():
     skill_tree_col = db["skill_tree"]
     questions_col = db["questions"]
 
+    # ── Merge Calibrated JD Question Bank (Python, SQL, React, Docker, DSA, ML, JS) ──
+    try:
+        try:
+            from database.jd_question_bank import JD_QUESTION_BANK
+        except ImportError:
+            from jd_question_bank import JD_QUESTION_BANK
+        for skill, levels in JD_QUESTION_BANK.items():
+            QUESTION_BANK[skill] = {
+                "Easy": list(levels.get("Easy", [])),
+                "Medium": list(levels.get("Medium", [])),
+                "Hard": list(levels.get("Hard", [])),
+            }
+    except Exception as e:
+        print(f"Notice: Could not load JD question bank for seeding: {e}")
+
     # ── Merge Curated PDF Question Bank (300 questions from 5 domain PDFs) ──
     try:
         try:
@@ -207,11 +226,11 @@ def seed_skill_tree():
             from pdf_extractor import load_cached_pdf_questions
         pdf_questions = load_cached_pdf_questions()
         for skill, levels in pdf_questions.items():
-            if skill not in QUESTION_BANK:
-                QUESTION_BANK[skill] = {"Easy": [], "Medium": [], "Hard": []}
-            for diff in ("Easy", "Medium", "Hard"):
-                if diff in levels:
-                    QUESTION_BANK[skill][diff] = levels[diff]
+            QUESTION_BANK[skill] = {
+                "Easy": list(levels.get("Easy", [])),
+                "Medium": list(levels.get("Medium", [])),
+                "Hard": list(levels.get("Hard", [])),
+            }
     except Exception as e:
         print(f"Notice: Could not load PDF questions for seeding: {e}")
 

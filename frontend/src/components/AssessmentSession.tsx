@@ -8,6 +8,7 @@ type QuestionType = 'MCQ' | 'CODING';
 interface AssessmentSessionProps {
   candidateSkills?: string[];
   missingSkills?: string[];
+  jdSkills?: string[];
   role?: string;
   targetCompany?: string | null;
   onFinish: (report: any) => void;
@@ -40,6 +41,7 @@ const LANGUAGE_MAP: Record<string, { id: number; monaco: string; starter: string
 export default function AssessmentSession({
   candidateSkills = ['Python', 'SQL', 'OOP'],
   missingSkills = [],
+  jdSkills = [],
   role = 'Backend Developer',
   targetCompany = null,
   onFinish,
@@ -92,6 +94,7 @@ export default function AssessmentSession({
             skills: candidateSkills,
             role: role,
             missing_skills: missingSkills,
+            jd_skills: jdSkills,
             target_company: targetCompany
           })
         });

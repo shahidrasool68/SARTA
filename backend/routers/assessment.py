@@ -313,6 +313,18 @@ FALLBACK_QUESTIONS = {
     }
 }
 
+# ── Integrate Calibrated JD Topics (Python, SQL, React, Docker, DSA, ML, JS) ──
+try:
+    from database.jd_question_bank import JD_QUESTION_BANK
+    for _skill, _levels in JD_QUESTION_BANK.items():
+        FALLBACK_QUESTIONS[_skill] = {
+            "Easy": list(_levels.get("Easy", [])),
+            "Medium": list(_levels.get("Medium", [])),
+            "Hard": list(_levels.get("Hard", [])),
+        }
+except Exception as _e:
+    print(f"Notice: Could not load JD question bank: {_e}")
+
 # ── Integrate Curated PDF Question Bank (OS, CN, OOP, System Design, Aptitude) ──
 _PDF_CACHE_FILE = Path(__file__).resolve().parent.parent / "database" / "parsed_pdf_questions.json"
 if _PDF_CACHE_FILE.exists():
@@ -320,31 +332,77 @@ if _PDF_CACHE_FILE.exists():
         with open(_PDF_CACHE_FILE, "r", encoding="utf-8") as _f:
             _pdf_bank = json.load(_f)
             for _skill, _levels in _pdf_bank.items():
-                if _skill not in FALLBACK_QUESTIONS:
-                    FALLBACK_QUESTIONS[_skill] = {"Easy": [], "Medium": [], "Hard": []}
-                for _diff in ("Easy", "Medium", "Hard"):
-                    if _diff in _levels:
-                        # Add questions from the calibrated 60-question PDF bank
-                        FALLBACK_QUESTIONS[_skill][_diff].extend(_levels[_diff])
+                FALLBACK_QUESTIONS[_skill] = {
+                    "Easy": list(_levels.get("Easy", [])),
+                    "Medium": list(_levels.get("Medium", [])),
+                    "Hard": list(_levels.get("Hard", [])),
+                }
     except Exception as _e:
         print(f"Notice: Could not load PDF question cache: {_e}")
 
 
 DIFFICULTIES = ("Easy", "Medium", "Hard")
 SUPPORTED_SKILLS = tuple(FALLBACK_QUESTIONS)
+
+# Alias map to normalize common resume / JD skills to assessable question bank topics
+SKILL_ALIASES = {
+    "mysql": "SQL",
+    "postgresql": "SQL",
+    "postgres": "SQL",
+    "sqlite": "SQL",
+    "mongodb": "SQL",
+    "redis": "SQL",
+    "typescript": "JavaScript",
+    "js": "JavaScript",
+    "ts": "JavaScript",
+    "node.js": "JavaScript",
+    "nodejs": "JavaScript",
+    "express": "JavaScript",
+    "deep learning": "Machine Learning",
+    "ml": "Machine Learning",
+    "nlp": "Machine Learning",
+    "tensorflow": "Machine Learning",
+    "pytorch": "Machine Learning",
+    "django": "Python",
+    "fastapi": "Python",
+    "flask": "Python",
+    "kubernetes": "Docker",
+    "k8s": "Docker",
+    "containerization": "Docker",
+    "containers": "Docker",
+    "ci/cd": "Docker",
+    "dsa": "Data Structures",
+    "algorithms": "Data Structures",
+    "data structure": "Data Structures",
+    "data structures": "Data Structures",
+    "lld": "System Design",
+    "hld": "System Design",
+    "low level design": "System Design",
+    "high level design": "System Design",
+    "microservices": "System Design",
+    "cn": "Computer Networks",
+    "networking": "Computer Networks",
+    "operating system": "OS",
+    "operating systems": "OS",
+    "linux": "OS",
+}
+
 ROLE_SKILLS = {
-    "web development": ("JavaScript", "React", "SQL", "OOP"),
-    "frontend developer": ("JavaScript", "React", "OOP", "Data Structures"),
-    "backend developer": ("Python", "SQL", "OS", "System Design"),
-    "data science": ("Python", "Machine Learning", "SQL", "Data Structures"),
-    "data scientist": ("Python", "Machine Learning", "SQL", "Data Structures"),
-    "software engineer": ("Data Structures", "OOP", "OS", "Computer Networks"),
+    "software engineer": ("OOP", "OS", "System Design", "Computer Networks"),
+    "backend developer": ("System Design", "OS", "OOP", "Computer Networks"),
+    "frontend developer": ("OOP", "Computer Networks", "System Design", "Aptitude"),
+    "web development": ("Computer Networks", "System Design", "OOP", "Aptitude"),
+    "full stack developer": ("System Design", "OOP", "OS", "Computer Networks"),
+    "data science": ("OOP", "OS", "System Design", "Aptitude"),
+    "data scientist": ("OOP", "OS", "System Design", "Aptitude"),
+    "devops / cloud engineer": ("OS", "Computer Networks", "System Design", "Aptitude"),
 }
 
 class StartSessionRequest(BaseModel):
     skills: List[str] = Field(default_factory=list)
     role: str = "Backend Developer"
     missing_skills: List[str] = Field(default_factory=list)
+    jd_skills: List[str] = Field(default_factory=list)
     target_company: Optional[str] = None
 
 class MCQRequest(BaseModel):
@@ -385,23 +443,55 @@ def session_or_404(session_id):
 
 
 def canonical_skill(skill):
-    return next((s for s in SUPPORTED_SKILLS if s.casefold() == skill.casefold()), None)
+    if not skill or not isinstance(skill, str):
+        return None
+    cleaned = skill.strip().lower()
+    if cleaned in SKILL_ALIASES:
+        target = SKILL_ALIASES[cleaned]
+        if target in SUPPORTED_SKILLS:
+            return target
+    return next((s for s in SUPPORTED_SKILLS if s.casefold() == cleaned), None)
 
 
 def available_levels(skill):
-    return [d for d in DIFFICULTIES if FALLBACK_QUESTIONS[skill].get(d)]
+    return [d for d in DIFFICULTIES if FALLBACK_QUESTIONS.get(skill, {}).get(d)]
+
+
+def get_mongo_questions(skill: str, difficulty: str) -> list:
+    """Fetch questions directly from MongoDB Atlas if available."""
+    try:
+        from database.mongo_skill_tree import get_db
+        db = get_db()
+        docs = list(db["questions"].find(
+            {"skill": skill, "difficulty": difficulty},
+            {"_id": 1, "question": 1, "options": 1, "correct_answer": 1, "difficulty": 1}
+        ))
+        return docs
+    except Exception:
+        return []
 
 
 def make_question(skill, difficulty, seen):
     levels = sorted(available_levels(skill), key=lambda level: abs(DIFFICULTIES.index(level) - DIFFICULTIES.index(difficulty)))
     for level in levels:
-        options = FALLBACK_QUESTIONS[skill][level]
-        choices = [(i,q) for i,q in enumerate(options) if f"{skill}:{level}:{i}" not in seen]
+        # 1. Try querying live MongoDB Atlas first
+        mongo_docs = get_mongo_questions(skill, level)
+        if mongo_docs:
+            choices = [q for q in mongo_docs if str(q["_id"]) not in seen]
+            if choices:
+                q = random.choice(choices)
+                key = str(q["_id"])
+                shuffled_options = list(q["options"])
+                random.shuffle(shuffled_options)
+                return key, {"_id": key, "skill": skill, "difficulty": level, "question": q["question"], "options": shuffled_options}, q["correct_answer"]
+
+        # 2. Fallback to local calibrated bank if MongoDB is offline or empty
+        options = FALLBACK_QUESTIONS.get(skill, {}).get(level, [])
+        choices = [(i, q) for i, q in enumerate(options) if f"{skill}:{level}:{i}" not in seen]
         if choices:
             i, q = random.choice(choices)
             key = f"{skill}:{level}:{i}"
             # Shuffle options so the correct answer isn't always in the same position.
-            # correct_answer is stored by value, so validation is unaffected.
             shuffled_options = list(q["options"])
             random.shuffle(shuffled_options)
             return key, {"_id": key, "skill": skill, "difficulty": level, "question": q["question"], "options": shuffled_options}, q["correct_answer"]
@@ -418,17 +508,49 @@ def start_assessment_session(req: StartSessionRequest):
     skills = []
     role_key = req.role.strip().lower()
     role_topics = ROLE_SKILLS.get(role_key, ROLE_SKILLS["software engineer"])
-    # Prioritize skills demonstrated on the resume which overlap the chosen role;
-    # include missing role prerequisites to verify gaps, then general fundamentals.
-    ordered = [s for s in role_topics if s.casefold() in {x.casefold() for x in req.skills}]
-    ordered += [s for s in role_topics if s.casefold() in {x.casefold() for x in req.missing_skills}]
-    ordered += list(role_topics) + req.skills + req.missing_skills + ["OOP", "Python"]
-    for requested in ordered:
-        skill = canonical_skill(requested)
-        if skill and skill not in skills:
-            skills.append(skill)
+
+    # 1. First, select up to 2 topics directly from the Job Description (JD) stack / gap skills.
+    # This evaluates candidate readiness directly on the specific tools & technologies requested in the JD!
+    jd_candidates = []
+    for s in req.missing_skills:
+        c = canonical_skill(s)
+        if c and c not in jd_candidates:
+            jd_candidates.append(c)
+    for s in req.jd_skills:
+        c = canonical_skill(s)
+        if c and c not in jd_candidates:
+            jd_candidates.append(c)
+
+    # If explicit targeted skills were passed (e.g. in test or manual selection):
+    if not jd_candidates and req.skills and len(req.skills) <= 4:
+        for s in req.skills:
+            c = canonical_skill(s)
+            if c and c not in jd_candidates:
+                jd_candidates.append(c)
+
+    for topic in jd_candidates:
+        if topic not in skills:
+            skills.append(topic)
+        if len(skills) == 2:  # Reserve 2 slots for JD stack / gap topics
+            break
+
+    # 2. Fill the remaining slots with Core CS Fundamentals from the calibrated PDF bank
+    for topic in role_topics:
+        can = canonical_skill(topic)
+        if can and can not in skills:
+            skills.append(can)
         if len(skills) == 4:
             break
+
+    # 3. Fallback to general CS pillars if still under 4
+    if len(skills) < 4:
+        for fallback in ("System Design", "OS", "OOP", "Computer Networks", "Aptitude", "Python", "SQL"):
+            can = canonical_skill(fallback)
+            if can and can not in skills:
+                skills.append(can)
+            if len(skills) == 4:
+                break
+
     if not skills:
         raise HTTPException(status_code=422, detail="No assessable skills selected")
 
@@ -456,7 +578,7 @@ def start_assessment_session(req: StartSessionRequest):
 
 
 @router.post("/next-mcq")
-def next_mcq(req: MCQRequest):
+async def next_mcq(req: MCQRequest):
     session = session_or_404(req.session_id)
     if session["completed"]:
         raise HTTPException(status_code=409, detail="Assessment is already complete")
@@ -471,6 +593,19 @@ def next_mcq(req: MCQRequest):
     if state["questions_answered"] >= 3:
         raise HTTPException(status_code=409, detail="Skill question limit reached")
     selected = make_question(req.skill, state["difficulty"], set(session["seen"]))
+    if not selected:
+        # Dynamic LLM generation for JD requirements or exhausted bank using calibrated exemplars
+        try:
+            from services.llm_question_generator import generate_jd_questions
+            new_qs = await generate_jd_questions(req.skill, state["difficulty"], count=3)
+            if new_qs:
+                if req.skill not in FALLBACK_QUESTIONS:
+                    FALLBACK_QUESTIONS[req.skill] = {"Easy": [], "Medium": [], "Hard": []}
+                FALLBACK_QUESTIONS[req.skill][state["difficulty"]].extend(new_qs)
+                selected = make_question(req.skill, state["difficulty"], set(session["seen"]))
+        except Exception as e:
+            print(f"Notice: LLM dynamic question generation fallback: {e}")
+
     if not selected:
         raise HTTPException(status_code=409, detail="Question bank exhausted")
     key, public, correct = selected

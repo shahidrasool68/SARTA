@@ -24,6 +24,14 @@ ROLE_PROFILES = {
     ]
 }
 
+ROLE_ASSESSMENT_TOPICS = {
+    "Backend Developer": ["System Design", "OS", "OOP", "Computer Networks"],
+    "Frontend Developer": ["OOP", "Computer Networks", "System Design", "Aptitude"],
+    "Full Stack Developer": ["System Design", "OOP", "OS", "Computer Networks"],
+    "Data Scientist / ML Engineer": ["OOP", "OS", "System Design", "Aptitude"],
+    "DevOps / Cloud Engineer": ["OS", "Computer Networks", "System Design", "Aptitude"],
+}
+
 def infer_role_skills(role_name: str) -> list[str]:
     """
     Given a role name (e.g. 'Frontend Developer'), return the predefined 
@@ -48,7 +56,7 @@ def infer_role_from_skills(candidate_skills: list[str]) -> dict:
             "confidence": 0.0,
             "matched_skills": [],
             "missing_core_skills": ROLE_PROFILES[default_role][:4],
-            "assessment_skills": ["Python", "SQL", "Data Structures", "OOP"]
+            "assessment_skills": ROLE_ASSESSMENT_TOPICS[default_role]
         }
     
     cand_lower = {s.lower() for s in candidate_skills}
@@ -70,12 +78,11 @@ def infer_role_from_skills(candidate_skills: list[str]) -> dict:
 
     confidence = round((len(best_matched) / len(ROLE_PROFILES[best_role])) * 100, 1) if best_role in ROLE_PROFILES else 0
     
-    # Assessment skills: priorize matched core skills, then missing core skills, plus CS fundamentals
-    assessment_skills = best_matched[:3]
-    if len(assessment_skills) < 3 and best_missing:
-        assessment_skills.extend(best_missing[: 3 - len(assessment_skills)])
-    if not assessment_skills:
-        assessment_skills = ["Python", "Data Structures", "OOP"]
+    # Adaptive Assessment Targets: Map inferred role to calibrated CS foundation domains
+    # (OOP, OS, System Design, Computer Networks, Aptitude from the curated 300-question PDF bank)
+    assessment_skills = ROLE_ASSESSMENT_TOPICS.get(
+        best_role, ["OOP", "OS", "System Design", "Computer Networks"]
+    )
 
     return {
         "role": best_role,

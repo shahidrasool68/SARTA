@@ -44,3 +44,4 @@ assessment_sessions.sqlite3
 *.sqlite3-wal
 *.db
 backend/.env
+*.zip
