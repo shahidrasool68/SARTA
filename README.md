@@ -26,5 +26,3 @@ Open http://localhost:3000. Coding submissions require a separate, running Judge
 cd backend
 pytest -q tests/test_assessment.py
 ```
-
-The repository is a prototype with a small curated question bank; meaningful deployment and scientific evaluation require a real sandbox, broader reviewed content, authentication and a user study. No field-study results are claimed by this README.
